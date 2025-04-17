@@ -1,0 +1,242 @@
+import React from "react";
+import HeroImage from "../assets/main.jpg";
+import { TypeAnimation } from "react-type-animation";
+import { motion } from "framer-motion";
+import { FaGithub, FaLinkedin, FaYoutube, FaTwitter, FaFileDownload, FaWhatsapp, FaFacebook } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
+
+const Home = () => {
+  const socialLinks = [
+    { icon: <FaGithub />, url: "https://github.com/tobie1996?tab=repositories", name: "GitHub" },
+    { icon: <FaLinkedin />, url: "https://cm.linkedin.com/in/tobie-mbarga-mbarga-43b58726a", name: "LinkedIn" },
+    { icon: <FaYoutube />, url: "https://www.youtube.com/@TBWINV444", name: "YouTube" },
+    { icon: <FaWhatsapp />, url: "https://wa.me/237696926972?text=Bonjour%20je%20souhaite%20plus%20d'informations%20sur%20vos%20services", name: "Whatsapp" },
+    { icon: <HiOutlineMail />, url: "mailto:tobiemba@gmail.com", name: "Email" },
+    { icon: <FaFacebook />, url: "https://www.facebook.com/ekassi.mbarga/", name: "Facebook" }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
+
+  const waterDropVariants = {
+    animate: {
+      rotate: [0, 360],
+      transition: {
+        duration: 20,
+        repeat: Infinity,
+        ease: "linear"
+      }
+    }
+  };
+
+  const dropVariants = {
+    animate: (i) => ({
+      opacity: [0.4, 0.8, 0.4],
+      scale: [0.8, 1.2, 0.8],
+      transition: {
+        duration: 2 + Math.random() * 3,
+        repeat: Infinity,
+        delay: i * 0.2
+      }
+    })
+  };
+
+  const createWaterDrops = () => {
+    const drops = [];
+    const count = 16;
+    const radius = 200;
+
+    for (let i = 0; i < count; i++) {
+      const angle = (i * 360) / count;
+      const x = radius * Math.cos((angle * Math.PI) / 180);
+      const y = radius * Math.sin((angle * Math.PI) / 180);
+
+      drops.push(
+        <motion.div
+          key={i}
+          className="absolute w-3 h-3 rounded-full bg-blue-400 opacity-70 filter blur-[1px]"
+          style={{
+            left: `calc(50% + ${x}px)`,
+            top: `calc(50% + ${y}px)`,
+            transform: 'translate(-50%, -50%)'
+          }}
+          variants={dropVariants}
+          animate="animate"
+          custom={i}
+        />
+      );
+    }
+
+    return drops;
+  };
+
+  const handleDownloadCV = () => {
+    const cvUrl = '/chemin/vers/votre/cv.pdf';
+    const link = document.createElement('a');
+    link.href = cvUrl;
+    link.download = 'CV_Tobie_Mbarga.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  return (
+    <motion.section 
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 bg-gray-900 w-full py-8 md:py-12"
+      id="home"
+    >
+      {/* Image Section */}
+      <motion.div 
+        variants={itemVariants}
+        className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 mt-16 md:mt-0 relative"
+      >
+        <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
+          <motion.div 
+            className="absolute inset-0 w-full h-full"
+            variants={waterDropVariants}
+            animate="animate"
+          >
+            {createWaterDrops()}
+          </motion.div>
+          
+          <motion.img
+            src={HeroImage}
+            alt="Tobie Mbarga"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 100 }}
+            className="relative z-10 rounded-full w-full h-full object-cover border-4 border-red-500 shadow-xl md:shadow-2xl"
+          />
+          
+          <motion.div 
+            className="absolute inset-0 rounded-full border-4 border-transparent hover:border-red-500 hover:animate-pulse z-20"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          />
+        </div>
+      </motion.div>
+
+      {/* Text Section */}
+      <motion.div 
+        variants={containerVariants}
+        className="w-full md:w-1/2 text-center md:text-left px-4 sm:px-0"
+      >
+        <motion.h1 
+          variants={itemVariants}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white leading-tight"
+        >
+          Bonjour, je suis <span className="text-red-500">TOBIE</span>
+        </motion.h1>
+
+        <motion.h3 
+          variants={itemVariants}
+          className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-300"
+        >
+          <span className="mr-2">Je suis</span>
+          <TypeAnimation
+            sequence={[
+              "Développeur Web Full-Stack", 1000,
+              "Spécialiste Frontend & Backend", 1000,
+              "Designer Graphique Créatif", 1000,
+              "Applications Web, Mobiles & Bureautiques", 1000,
+            ]}
+            speed={50}
+            deletionSpeed={70}
+            wrapper="span"
+            cursor={true}
+            repeat={Infinity}
+            className="text-red-500 inline-block"
+          />
+        </motion.h3>
+
+        <motion.p 
+          variants={itemVariants}
+          className="text-sm sm:text-base md:text-lg mb-6 md:mb-8 text-gray-400 leading-relaxed max-w-2xl mx-auto md:mx-0"
+        >
+          Passionné par la technologie et la création, je suis Développeur Full-Stack et Infographe, avec une expertise
+          dans le développement d'applications web, mobiles et bureautiques.
+          Doté d'une solide expérience en Frontend (React, Next.js) et Backend (Node.js, FastAPI), je conçois des solutions performantes,
+          esthétiques et centrées sur l'utilisateur.
+        </motion.p>
+
+        {/* Social Icons */}
+        <motion.div 
+          variants={itemVariants}
+          className="flex justify-center md:justify-start space-x-3 sm:space-x-4 mb-6 md:mb-8"
+        >
+          {socialLinks.map((social, index) => (
+            <motion.a
+              key={index}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -5, scale: 1.1, color: "#EF4444" }}
+              whileTap={{ scale: 0.9 }}
+              className="text-xl sm:text-2xl text-gray-400 hover:text-red-500 transition-colors"
+              aria-label={social.name}
+              title={social.name}
+            >
+              {social.icon}
+            </motion.a>
+          ))}
+        </motion.div>
+
+        {/* Action Buttons */}
+        <motion.div 
+          variants={itemVariants}
+          className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start"
+        >
+          <motion.a
+            href="#contact"
+            whileHover={{ y: -3, boxShadow: "0 5px 15px rgba(239, 68, 68, 0.4)" }}
+            whileTap={{ scale: 0.95 }}
+            className="px-6 py-2 sm:px-8 sm:py-3 bg-red-500 text-white font-medium rounded-lg text-base sm:text-lg hover:bg-red-600 transition-colors text-center flex-1 sm:flex-none"
+          >
+            Me contacter
+          </motion.a>
+          <motion.a
+            href="/experience"
+            whileHover={{ y: -3, backgroundColor: "#1F2937" }}
+            whileTap={{ scale: 0.95 }}
+            className="px-6 py-2 sm:px-8 sm:py-3 border border-gray-600 text-white font-medium rounded-lg text-base sm:text-lg hover:bg-gray-800 transition-colors text-center flex-1 sm:flex-none"
+          >
+            Voir mes projets
+          </motion.a>
+          <motion.button
+            onClick={handleDownloadCV}
+            whileHover={{ y: -3, backgroundColor: "#374151" }}
+            whileTap={{ scale: 0.95 }}
+            className="px-6 py-2 sm:px-8 sm:py-3 bg-gray-700 text-white font-medium rounded-lg text-base sm:text-lg hover:bg-gray-600 transition-colors flex items-center justify-center gap-2 flex-1 sm:flex-none"
+          >
+            <FaFileDownload className="text-lg" /> <span>Télécharger CV</span>
+          </motion.button>
+        </motion.div>
+      </motion.div>
+    </motion.section>
+  );
+};
+
+export default Home;
