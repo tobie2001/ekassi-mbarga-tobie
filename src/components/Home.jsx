@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import HeroImage from "../assets/main.jpg";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
@@ -38,9 +39,9 @@ const Home = () => {
     }
   };
 
-  const waterDropVariants = {
+  const orbitVariants = {
     animate: {
-      rotate: [0, 360],
+      rotate: 360,
       transition: {
         duration: 20,
         repeat: Infinity,
@@ -49,45 +50,51 @@ const Home = () => {
     }
   };
 
-  const dropVariants = {
+  const starVariants = {
     animate: (i) => ({
-      opacity: [0.4, 0.8, 0.4],
+      rotate: [0, 360],
+      opacity: [0.6, 1, 0.6],
       scale: [0.8, 1.2, 0.8],
       transition: {
-        duration: 2 + Math.random() * 3,
+        duration: 3 + Math.random() * 4,
         repeat: Infinity,
         delay: i * 0.2
       }
     })
   };
 
-  const createWaterDrops = () => {
-    const drops = [];
-    const count = 16;
-    const radius = 200;
+  const createStars = () => {
+    const stars = [];
+    const count = 12;
+    // Ajustement du rayon en fonction de la taille de l'écran
+    const radius = window.innerWidth < 768 ? 120 : 180;
 
     for (let i = 0; i < count; i++) {
       const angle = (i * 360) / count;
       const x = radius * Math.cos((angle * Math.PI) / 180);
       const y = radius * Math.sin((angle * Math.PI) / 180);
 
-      drops.push(
+      stars.push(
         <motion.div
           key={i}
-          className="absolute w-3 h-3 rounded-full bg-blue-400 opacity-70 filter blur-[1px]"
+          className="absolute w-4 h-4 text-yellow-400"
           style={{
             left: `calc(50% + ${x}px)`,
             top: `calc(50% + ${y}px)`,
             transform: 'translate(-50%, -50%)'
           }}
-          variants={dropVariants}
+          variants={starVariants}
           animate="animate"
           custom={i}
-        />
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
+          </svg>
+        </motion.div>
       );
     }
 
-    return drops;
+    return stars;
   };
 
   const handleDownloadCV = () => {
@@ -116,10 +123,10 @@ const Home = () => {
         <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
           <motion.div 
             className="absolute inset-0 w-full h-full"
-            variants={waterDropVariants}
+            variants={orbitVariants}
             animate="animate"
           >
-            {createWaterDrops()}
+            {createStars()}
           </motion.div>
           
           <motion.img
@@ -209,22 +216,26 @@ const Home = () => {
           variants={itemVariants}
           className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start"
         >
-          <motion.a
-            href="#contact"
-            whileHover={{ y: -3, boxShadow: "0 5px 15px rgba(239, 68, 68, 0.4)" }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-2 sm:px-8 sm:py-3 bg-red-500 text-white font-medium rounded-lg text-base sm:text-lg hover:bg-red-600 transition-colors text-center flex-1 sm:flex-none"
-          >
-            Me contacter
-          </motion.a>
-          <motion.a
-            href="/experience"
-            whileHover={{ y: -3, backgroundColor: "#1F2937" }}
-            whileTap={{ scale: 0.95 }}
-            className="px-6 py-2 sm:px-8 sm:py-3 border border-gray-600 text-white font-medium rounded-lg text-base sm:text-lg hover:bg-gray-800 transition-colors text-center flex-1 sm:flex-none"
-          >
-            Voir mes projets
-          </motion.a>
+          <Link to="#contact">
+            <motion.div
+              whileHover={{ y: -3, boxShadow: "0 5px 15px rgba(239, 68, 68, 0.4)" }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-2 sm:px-8 sm:py-3 bg-red-500 text-white font-medium rounded-lg text-base sm:text-lg hover:bg-red-600 transition-colors text-center flex-1 sm:flex-none"
+            >
+              Me contacter
+            </motion.div>
+          </Link>
+          
+          <Link to="/experience">
+            <motion.div
+              whileHover={{ y: -3, backgroundColor: "#1F2937" }}
+              whileTap={{ scale: 0.95 }}
+              className="px-6 py-2 sm:px-8 sm:py-3 border border-gray-600 text-white font-medium rounded-lg text-base sm:text-lg hover:bg-gray-800 transition-colors text-center flex-1 sm:flex-none"
+            >
+              Voir mes projets
+            </motion.div>
+          </Link>
+          
           <motion.button
             onClick={handleDownloadCV}
             whileHover={{ y: -3, backgroundColor: "#374151" }}
