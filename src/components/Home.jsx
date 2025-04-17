@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import HeroImage from "../assets/main.jpg";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaYoutube, FaTwitter, FaFileDownload, FaWhatsapp, FaFacebook } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
 const Home = () => {
@@ -50,51 +50,46 @@ const Home = () => {
     }
   };
 
-  const starVariants = {
+  const circleVariants = {
     animate: (i) => ({
-      rotate: [0, 360],
       opacity: [0.6, 1, 0.6],
       scale: [0.8, 1.2, 0.8],
+      backgroundColor: ["#3B82F6", "#EF4444", "#3B82F6"],
       transition: {
-        duration: 3 + Math.random() * 4,
+        duration: 3 + Math.random() * 3,
         repeat: Infinity,
         delay: i * 0.2
       }
     })
   };
 
-  const createStars = () => {
-    const stars = [];
-    const count = 12;
-    // Ajustement du rayon en fonction de la taille de l'écran
-    const radius = window.innerWidth < 768 ? 120 : 180;
+  const createCircles = () => {
+    const circles = [];
+    const count = 10; // Nombre de cercles
+    const radius = window.innerWidth < 768 ? 140 : 270; // Rayon adaptatif
 
     for (let i = 0; i < count; i++) {
       const angle = (i * 360) / count;
       const x = radius * Math.cos((angle * Math.PI) / 180);
       const y = radius * Math.sin((angle * Math.PI) / 180);
 
-      stars.push(
+      circles.push(
         <motion.div
           key={i}
-          className="absolute w-4 h-4 text-yellow-400"
+          className="absolute w-4 h-4 rounded-full"
           style={{
             left: `calc(50% + ${x}px)`,
             top: `calc(50% + ${y}px)`,
             transform: 'translate(-50%, -50%)'
           }}
-          variants={starVariants}
+          variants={circleVariants}
           animate="animate"
           custom={i}
-        >
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" />
-          </svg>
-        </motion.div>
+        />
       );
     }
 
-    return stars;
+    return circles;
   };
 
   const handleDownloadCV = () => {
@@ -115,20 +110,22 @@ const Home = () => {
       className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 bg-gray-900 w-full py-8 md:py-12"
       id="home"
     >
-      {/* Image Section */}
+      {/* Section Image avec cercles tournants */}
       <motion.div 
         variants={itemVariants}
         className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 mt-16 md:mt-0 relative"
       >
         <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
+          {/* Conteneur des cercles tournants */}
           <motion.div 
             className="absolute inset-0 w-full h-full"
             variants={orbitVariants}
             animate="animate"
           >
-            {createStars()}
+            {createCircles()}
           </motion.div>
           
+          {/* Image principale */}
           <motion.img
             src={HeroImage}
             alt="Tobie Mbarga"
@@ -138,6 +135,7 @@ const Home = () => {
             className="relative z-10 rounded-full w-full h-full object-cover border-4 border-red-500 shadow-xl md:shadow-2xl"
           />
           
+          {/* Effet hover sur l'image */}
           <motion.div 
             className="absolute inset-0 rounded-full border-4 border-transparent hover:border-red-500 hover:animate-pulse z-20"
             whileHover={{ scale: 1.05 }}
@@ -146,7 +144,7 @@ const Home = () => {
         </div>
       </motion.div>
 
-      {/* Text Section */}
+      {/* Section Texte */}
       <motion.div 
         variants={containerVariants}
         className="w-full md:w-1/2 text-center md:text-left px-4 sm:px-0"
@@ -189,7 +187,7 @@ const Home = () => {
           esthétiques et centrées sur l'utilisateur.
         </motion.p>
 
-        {/* Social Icons */}
+        {/* Icônes sociales */}
         <motion.div 
           variants={itemVariants}
           className="flex justify-center md:justify-start space-x-3 sm:space-x-4 mb-6 md:mb-8"
@@ -211,12 +209,12 @@ const Home = () => {
           ))}
         </motion.div>
 
-        {/* Action Buttons */}
+        {/* Boutons d'action */}
         <motion.div 
           variants={itemVariants}
           className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start"
         >
-          <Link to="contact">
+          <Link to="#contact">
             <motion.div
               whileHover={{ y: -3, boxShadow: "0 5px 15px rgba(239, 68, 68, 0.4)" }}
               whileTap={{ scale: 0.95 }}
