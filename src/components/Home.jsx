@@ -216,7 +216,7 @@ const Home = () => {
           variants={itemVariants}
           className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start"
         >
-          <Link to="#contact">
+          <Link to="contact">
             <motion.div
               whileHover={{ y: -3, boxShadow: "0 5px 15px rgba(239, 68, 68, 0.4)" }}
               whileTap={{ scale: 0.95 }}
