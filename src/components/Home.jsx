@@ -93,7 +93,7 @@ const Home = () => {
   };
 
   const handleDownloadCV = () => {
-    const cvUrl = '/chemin/vers/votre/cv.pdf';
+    const cvUrl = '/documents/cv.pdf';
     const link = document.createElement('a');
     link.href = cvUrl;
     link.download = 'CV_Tobie_Mbarga.pdf';
