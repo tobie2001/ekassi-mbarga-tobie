@@ -168,77 +168,9 @@ const Education = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <motion.h3 variants={itemVariants} className="text-3xl font-bold text-gray-900">
-              <span className="text-red-500">Certifications</span> & Compétences
-            </motion.h3>
+          
           </motion.div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
-          >
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.03 }}
-                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center text-center"
-              >
-                <div className="mb-4">
-                  {cert.icon}
-                </div>
-                <h4 className="text-lg font-bold text-gray-900 mb-2">{cert.title}</h4>
-                <p className="text-gray-600 mb-2">{cert.issuer}</p>
-                <div className="text-sm text-gray-500">
-                  {cert.year} {cert.score && `• ${cert.score}`}
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Language Skills */}
-            <motion.div
-              variants={itemVariants}
-              whileHover={{ scale: 1.03 }}
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-            >
-              <div className="flex items-center mb-4">
-                <FaLanguage className="text-2xl text-red-500 mr-3" />
-                <h4 className="text-lg font-bold text-gray-900">Langues</h4>
-              </div>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <span>Français</span>
-                    <span>Natif</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-red-500 h-2 rounded-full" style={{ width: '100%' }}></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <span>Anglais</span>
-                    <span>A2</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-red-500 h-2 rounded-full" style={{ width: '90%' }}></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <span>Allemand</span>
-                    <span>B2</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-red-500 h-2 rounded-full" style={{ width: '70%' }}></div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
 
           {/* Skills Section */}
           <motion.div

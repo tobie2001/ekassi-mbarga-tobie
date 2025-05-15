@@ -287,39 +287,7 @@ const Experience = () => {
         </div>
 
         {/* Certifications Section */}
-        <div>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="flex items-center mb-8"
-          >
-            <FaMedal className="text-3xl text-red-500 mr-4" />
-            <motion.h3 variants={itemVariants} className="text-2xl font-bold text-gray-900">
-              Certifications
-            </motion.h3>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <h4 className="text-xl font-bold text-gray-900 mb-2">{cert.name}</h4>
-                <div className="text-red-500 mb-2">{cert.issuer}</div>
-                <div className="text-gray-500">{cert.year}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+       
 
         {/* Modal */}
         {isModalOpen && selectedExperience && (
