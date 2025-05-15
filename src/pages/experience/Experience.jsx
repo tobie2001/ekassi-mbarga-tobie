@@ -80,28 +80,7 @@ const Experience = () => {
     }
   ];
 
-  const education = [
-    {
-      degree: "Master en Ingénierie Logicielle",
-      institution: "Université Paris-Saclay",
-      period: "2017 - 2019",
-      highlights: [
-        "Spécialisation en architectures distribuées",
-        "Mémoire sur l'optimisation des applications React",
-        "Projet de fin d'études noté 18/20"
-      ]
-    },
-    {
-      degree: "Licence Informatique",
-      institution: "Université Paris Descartes",
-      period: "2014 - 2017",
-      highlights: [
-        "Prix du meilleur projet étudiant 2016",
-        "Spécialisation en interfaces utilisateur",
-        "Échange Erasmus à Barcelone (1 semestre)"
-      ]
-    }
-  ];
+
 
   const certifications = [
     {
@@ -251,40 +230,7 @@ const Experience = () => {
         </div>
 
         {/* Education Section */}
-        <div className="mb-20">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="flex items-center mb-8"
-          >
-            <FaGraduationCap className="text-3xl text-red-500 mr-4" />
-           
-          </motion.div>
-
-          <div className="space-y-8">
-            {education.map((edu, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="relative pl-10 pb-8 border-l-2 border-red-500"
-              >
-                <div className="absolute -left-[9px] top-0 w-4 h-4 bg-red-500 rounded-full"></div>
-                <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">{edu.degree}</h4>
-                  <h5 className="text-lg font-semibold text-red-500 mb-2">{edu.institution}</h5>
-                  <div className="text-gray-500 mb-4">{edu.period}</div>
-                  <ul className="list-disc pl-5 space-y-2 text-gray-700">
-                    {edu.highlights.map((highlight, i) => (
-                      <li key={i}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+     
 
         {/* Certifications Section */}
        
