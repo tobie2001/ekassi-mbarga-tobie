@@ -8,10 +8,10 @@ const Education = () => {
     {
       degree: "Licence de Technologie",
       institution: "Institut Universitaire de Technologie de Ngaoundéré",
-      period: "2020 - 2023",
+      period: "2022 - 2023",
       description: " la conception, le développement, la maintenance et la gestion de logiciels de manière structurée et méthodique",
       highlights: [
-        "Mention Très Bien (16.5/20)",
+        "Assez Bien (12.5/20)",
         "Projet de fin d'études : Plateforme de gestion des patients avec notifications",
         "Cours avancés en développement web"
       ],
@@ -23,7 +23,7 @@ const Education = () => {
       period: "2020 - 2022",
       description: "Fondamentaux en algorithmique, structures de données et génie logiciel.",
       highlights: [
-        "Major de promotion (15.8/20)",
+        "Assez bien (12.8/20)",
         "Gestion des bugs et amélioration continue",
         "Projet : Développement d'une application de gestion  du personnel"
       ],
@@ -35,45 +35,14 @@ const Education = () => {
       period: "2017 - 2018",
       description: "Option Sciences Mathématiques et Physiques, spécialité Mathématiques.",
       highlights: [
-        "Mention Assez Bien (12,2/20)",
-        "Projet ISN : Simulation physique réalisée avec Processing",
-        "Participation aux Olympiades de Mathématiques"
+        "Passable (11,2/20)",
+        "Projet ISN : Pas de projets",
       ],
       icon: <FaBook className="text-3xl text-red-500" />
     }
     
   ];
 
-  const certifications = [
-    {
-      title: "Certification MOS (Microsoft Office Specialist)",
-      issuer: "Microsoft / Centres agréés (ISTA, CEFAM, etc.)",
-      year: "Variable",
-      description: "Valide les compétences sur Word, Excel, PowerPoint, Outlook.",
-      icon: <FaMicrosoft className="text-2xl text-blue-500" />
-    },
-    {
-      title: "Certification ICDL (Bureautique)",
-      issuer: "MultiSoft Accademique / Centres agréés",
-      year: "Variable",
-      description: "Couvre les bases de l'informatique et des outils bureautiques.",
-      icon: <FaFileAlt className="text-2xl text-green-500" />
-    },
-    {
-      title: "Certification en Développement Web (HTML/CSS/JS)",
-      issuer: "KevMax Sarl",
-      year: "Variable",
-      description: "Formations gratuites ou certifiantes en partenariat avec des acteurs locaux.",
-      icon: <FaCode className="text-2xl text-orange-500" />
-    },
-    {
-      title: "JavaScript",
-      issuer: "Cisco Networking Academy (ISTA, universités)",
-      year: "Variable",
-      description: "Pour les réseaux et infrastructures, mais inclut des modules web.",
-      icon: <FaNetworkWired className="text-2xl text-teal-500" />
-    }
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -188,8 +157,7 @@ const Education = () => {
                 "Rédaction technique",
                 "Présentations académiques",
                 "Gestion de projet",
-                "Méthodologies Agile",
-                "Revue de littérature",
+                "Méthodologies UML",
                 "Analyse statistique"
               ].map((skill, index) => (
                 <div key={index} className="flex items-center">

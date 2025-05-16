@@ -10,10 +10,10 @@ const Skills = () => {
       icon: <FaReact className="text-4xl text-blue-500" />,
       color: "bg-blue-500",
       skills: [
-        { name: "React/Next.js", level: 95 },
-        { name: "TypeScript", level: 90 },
-        { name: "Tailwind CSS", level: 85 },
-        { name: "Framer Motion", level: 80 }
+        { name: "React/Next.js", level: 65 },
+        { name: "TypeScript", level: 70 },
+        { name: "Tailwind CSS", level: 65 },
+        { name: "Framer Motion", level: 60 }
       ]
     },
     {
@@ -21,10 +21,10 @@ const Skills = () => {
       icon: <FaNodeJs className="text-4xl text-green-500" />,
       color: "bg-green-500",
       skills: [
-        { name: "Node.js/Express", level: 90 },
-        { name: "FASTAPI", level: 70 },
-        { name: "REST API", level: 95 },
-        { name: "Authentication", level: 85 }
+        { name: "Node.js/Express", level: 59 },
+        { name: "FASTAPI", level: 50 },
+        { name: "REST API", level: 60 },
+        { name: "Authentication", level: 70 }
       ]
     },
     {
@@ -32,8 +32,7 @@ const Skills = () => {
       icon: <FaMobile className="text-4xl text-purple-500" />,
       color: "bg-purple-500",
       skills: [
-        { name: "React Native", level: 85 },
-        { name: "Flutter", level: 75 },
+        { name: "React Native", level: 50 },
         { name: "Firebase", level: 50 },
         { name: "Mobile UI", level: 60 }
       ]
@@ -43,10 +42,10 @@ const Skills = () => {
       icon: <FaFigma className="text-4xl text-pink-500" />,
       color: "bg-pink-500",
       skills: [
-        { name: "Adobe animate", level: 90 },
-        { name: "Figma", level: 95 },
-        { name: "Photoshop", level: 85 },
-        { name: "Adobe Pemiere", level: 75 }
+        { name: "Adobe animate", level: 40 },
+        { name: "Figma", level: 55 },
+        { name: "Photoshop", level: 70 },
+        { name: "Adobe Pemiere", level: 85 }
       ]
     },
     {
@@ -54,10 +53,10 @@ const Skills = () => {
       icon: <FaDatabase className="text-4xl text-orange-500" />,
       color: "bg-orange-500",
       skills: [
-        { name: "MongoDB", level: 90 },
-        { name: "PostgreSQL", level: 85 },
-        { name: "Firestore", level: 80 },
-        { name: "Redis", level: 75 }
+        { name: "MongoDB", level: 60 },
+        { name: "PostgreSQL", level: 75 },
+        { name: "Firestore", level: 60 },
+        { name: "MySQL", level: 75 }
       ]
     },
   ];

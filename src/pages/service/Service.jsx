@@ -31,9 +31,9 @@ const Service = () => {
       icon: <FaPalette className="text-4xl mb-4 text-red-500" />,
       description: "Conceptions visuelles percutantes pour renforcer votre identité de marque.",
       features: [
-        "Identité visuelle",
-        "Maquettes UI/UX",
-        "Motion design",
+        "Adobe Premiere Pro",
+        "Maquettes FigmaX",
+        "Adobe Photoshop",
         "Illustrations vectorielles"
       ]
     },
@@ -42,34 +42,11 @@ const Service = () => {
       icon: <FaServer className="text-4xl mb-4 text-red-500" />,
       description: "Architecture robuste et sécurisée pour vos applications complexes.",
       features: [
-        "API REST/GraphQL",
+        "API REST",
         "Bases de données",
-        "Authentification sécurisée",
-        "Microservices"
+        "Authentification sécurisée"
       ]
     },
-    {
-      title: "Optimisation & SEO",
-      icon: <FaChartLine className="text-4xl mb-4 text-red-500" />,
-      description: "Amélioration des performances et visibilité de votre présence en ligne.",
-      features: [
-        "Audit technique",
-        "Optimisation Core Web Vitals",
-        "Stratégie SEO",
-        "Analytics & Tracking"
-      ]
-    },
-    {
-      title: "Conseil Technologique",
-      icon: <FaLightbulb className="text-4xl mb-4 text-red-500" />,
-      description: "Accompagnement dans vos choix technologiques et stratégie digitale.",
-      features: [
-        "Architecture technique",
-        "Roadmap produit",
-        "Veille technologique",
-        "Formation sur mesure"
-      ]
-    }
   ];
 
   const containerVariants = {
