@@ -1,22 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaHeart } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope, FaHeart, FaFacebook } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <FaGithub />, url: "https://github.com/votreprofil", name: "GitHub" },
-    { icon: <FaLinkedin />, url: "https://linkedin.com/in/votreprofil", name: "LinkedIn" },
-    { icon: <FaTwitter />, url: "https://twitter.com/votreprofil", name: "Twitter" },
-    { icon: <FaEnvelope />, url: "mailto:votre@email.com", name: "Email" }
+    { icon: <FaGithub />, url: "https://github.com/tobie1996", name: "GitHub" },
+    { icon: <FaLinkedin />, url: "https://cm.linkedin.com/in/tobie-mbarga-mbarga-43b58726a", name: "LinkedIn" },
+    { icon: <FaFacebook />, url: "https://www.facebook.com/ekassi.mbarga/?locale=zh_TW", name: "Facebook" },
+    { icon: <FaEnvelope />, url: "mailto:tobiemba@email.com", name: "Email" }
   ];
 
   const footerLinks = [
     { name: "Privacy Policy", path: "/privacy" },
     { name: "Terms of Service", path: "/terms" },
-    { name: "Sitemap", path: "/sitemap" }
+    { name: "Sitemap", path: "www.google.com" }
   ];
 
   const containerVariants = {

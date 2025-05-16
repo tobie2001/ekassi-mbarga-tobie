@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCode, FaMobileAlt, FaPalette, FaServer, FaChartLine, FaLightbulb } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Service = () => {
   const services = [
@@ -144,9 +145,9 @@ const Service = () => {
           <p className="text-red-100 mb-6 max-w-2xl mx-auto">
             Discutons de la meilleure façon de répondre à vos besoins spécifiques et de créer une solution qui dépasse vos attentes.
           </p>
-          <button className="bg-white text-red-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors duration-300">
+          <Link to="/contact" className="bg-white text-red-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors duration-300">
             Contactez-moi
-          </button>
+          </Link>
         </motion.div>
       </div>
     </motion.div>
