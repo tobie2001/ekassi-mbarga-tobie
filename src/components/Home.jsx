@@ -153,7 +153,7 @@ const Home = () => {
           variants={itemVariants}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white leading-tight"
         >
-          Bonjour, je suis <span className="text-red-500">MBARGA EKASSI TOBIE</span>
+          Bonjour, je suis <span className="text-red-500 text-sm">MBARGA EKASSI TOBIE</span>
         </motion.h1>
 
         <motion.h3 
@@ -166,7 +166,7 @@ const Home = () => {
               "Développeur Web Full-Stack", 1000,
               "Spécialiste Frontend & Backend", 1000,
               "Designer Graphique Créatif", 1000,
-              "Applications Web, Mobiles & Bureautiques", 1000,
+              "Développeur Web, Mobiles & Bureautiques", 1000,
             ]}
             speed={50}
             deletionSpeed={70}
