@@ -107,7 +107,7 @@ const Home = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 bg-gray-900 w-full py-8 md:py-12"
+      className="min-h-screen mt-4 flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 bg-gray-900 w-full py-8 md:py-12"
       id="home"
     >
       {/* Section Image avec cercles tournants */}
