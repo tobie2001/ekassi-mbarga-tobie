@@ -151,14 +151,14 @@ const Home = () => {
       >
         <motion.h1 
           variants={itemVariants}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white leading-tight"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 text-white leading-tight"
         >
-          Bonjour, je suis <span className="text-red-500 text-sm">MBARGA EKASSI TOBIE</span>
+          Bonjour, je suis <span className="text-red-500 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">MBARGA EKASSI TOBIE</span>
         </motion.h1>
 
         <motion.h3 
           variants={itemVariants}
-          className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 text-gray-300"
+          className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-gray-300"
         >
           <span className="mr-2">Je suis</span>
           <TypeAnimation
@@ -173,20 +173,13 @@ const Home = () => {
             wrapper="span"
             cursor={true}
             repeat={Infinity}
-            className="inline-block"
-            style={{
-              background: "linear-gradient(45deg, #EF4444, #3B82F6, #10B981, #F59E0B)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundSize: "200% 200%",
-              animation: "gradient 5s ease infinite"
-            }}
+            className="inline-block gradient-text text-lg sm:text-xl md:text-2xl lg:text-3xl"
           />
         </motion.h3>
 
         <motion.p 
           variants={itemVariants}
-          className="text-sm sm:text-base md:text-lg mb-6 md:mb-8 text-gray-400 leading-relaxed max-w-2xl mx-auto md:mx-0"
+          className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 md:mb-8 text-gray-400 leading-relaxed max-w-2xl mx-auto md:mx-0"
         >
           Expert en développement web et design numérique, je m'épanouis dans la création de solutions digitales innovantes.
           Mon expertise s'étend du développement Full-Stack à la conception graphique, en passant par la création d'applications
