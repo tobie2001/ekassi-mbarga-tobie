@@ -56,12 +56,12 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100 }}
-      className='fixed w-full flex justify-between items-center p-4 z-50 bg-gray-900 backdrop-blur-sm '
+      className='fixed w-full max-w-[100vw] overflow-x-hidden flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 py-4 z-50 bg-gray-900 backdrop-blur-sm'
     >
       <motion.div 
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className='text-3xl font-extrabold text-red-500 transition duration-300'
+        className='text-2xl sm:text-3xl font-extrabold text-red-500 transition duration-300'
       >
         <NavLink to="/">TOBIE</NavLink>
       </motion.div>
@@ -77,12 +77,12 @@ const Header = () => {
           <motion.div 
             key={item.id}
             variants={navItemVariants}
-            className='relative ml-8'
+            className='relative ml-4 lg:ml-8'
           >
             <NavLink 
               to={item.path}
               className={({ isActive }) => 
-                `text-lg font-medium ${isActive ? 'text-red-500' : 'text-white hover:text-red-300'} transition duration-300`
+                `text-base lg:text-lg font-medium ${isActive ? 'text-red-500' : 'text-white hover:text-red-300'} transition duration-300`
               }
             >
               {item.data}

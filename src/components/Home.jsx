@@ -107,7 +107,7 @@ const Home = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen mt-4 flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-12 lg:px-24 bg-gray-900 w-full py-8 md:py-12"
+      className="min-h-screen w-full max-w-[100vw] overflow-x-hidden flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 bg-gray-900 py-8 md:py-12"
       id="home"
     >
       {/* Section Image avec cercles tournants */}
@@ -115,7 +115,7 @@ const Home = () => {
         variants={itemVariants}
         className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 mt-16 md:mt-0 relative"
       >
-        <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
+        <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80">
           {/* Conteneur des cercles tournants */}
           <motion.div 
             className="absolute inset-0 w-full h-full"
@@ -147,13 +147,13 @@ const Home = () => {
       {/* Section Texte */}
       <motion.div 
         variants={containerVariants}
-        className="w-full md:w-1/2 text-center md:text-left px-4 sm:px-0"
+        className="w-full md:w-1/2 text-center md:text-left px-2 sm:px-4"
       >
         <motion.h1 
           variants={itemVariants}
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 text-white leading-tight"
         >
-          Salut, je suis <span className="text-red-500 text-sm sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">MBARGA EKASSI TOBIE</span>
+          Salut, je suis <span className="text-red-500 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">MBARGA EKASSI TOBIE</span>
         </motion.h1>
 
         <motion.h3 
