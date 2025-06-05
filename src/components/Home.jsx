@@ -128,7 +128,7 @@ const Home = () => {
           {/* Image principale */}
           <motion.img
             src={HeroImage}
-            alt="Tobie Mbarga"
+            alt="MBARGA EKASSI TOBIE"
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 100 }}
@@ -153,7 +153,7 @@ const Home = () => {
           variants={itemVariants}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white leading-tight"
         >
-          Bonjour, je suis <span className="text-red-500">TOBIE</span>
+          Bonjour, je suis <span className="text-red-500">MBARGA EKASSI TOBIE</span>
         </motion.h1>
 
         <motion.h3 
@@ -173,7 +173,14 @@ const Home = () => {
             wrapper="span"
             cursor={true}
             repeat={Infinity}
-            className="text-red-500 inline-block"
+            className="inline-block"
+            style={{
+              background: "linear-gradient(45deg, #EF4444, #3B82F6, #10B981, #F59E0B)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundSize: "200% 200%",
+              animation: "gradient 5s ease infinite"
+            }}
           />
         </motion.h3>
 
@@ -181,10 +188,10 @@ const Home = () => {
           variants={itemVariants}
           className="text-sm sm:text-base md:text-lg mb-6 md:mb-8 text-gray-400 leading-relaxed max-w-2xl mx-auto md:mx-0"
         >
-          Passionné par la technologie et la création, je suis Développeur Full-Stack et Infographe, avec une expertise
-          dans le développement d'applications web, mobiles et bureautiques.
-          Doté d'une solide expérience en Frontend (React, Next.js) et Backend (Node.js, FastAPI), je conçois des solutions performantes,
-          esthétiques et centrées sur l'utilisateur.
+          Expert en développement web et design numérique, je m'épanouis dans la création de solutions digitales innovantes.
+          Mon expertise s'étend du développement Full-Stack à la conception graphique, en passant par la création d'applications
+          web, mobiles et bureautiques. Je combine une approche technique rigoureuse avec une sensibilité artistique pour
+          concevoir des expériences utilisateur exceptionnelles et des interfaces modernes.
         </motion.p>
 
         {/* Icônes sociales */}
