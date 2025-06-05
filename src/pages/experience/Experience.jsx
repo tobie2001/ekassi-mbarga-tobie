@@ -48,7 +48,7 @@ const Experience = () => {
       ],
       tags: ["React", "TypeScript", "Redux", "Jest"],
       image: "/images/macTob.png",
-      projectUrl: "https://mactob-store.vercel.app/"
+      projectUrl: "https://mactob.vercel.app/"
     },
     {
       role: "Développeur Frontend et backend",
