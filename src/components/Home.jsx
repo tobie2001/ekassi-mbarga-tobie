@@ -153,7 +153,7 @@ const Home = () => {
           variants={itemVariants}
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 text-white leading-tight"
         >
-          Bonjour, je suis <span className="text-red-500 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">MBARGA EKASSI TOBIE</span>
+          Salut, je suis <span className="text-red-500 text-sm sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">MBARGA EKASSI TOBIE</span>
         </motion.h1>
 
         <motion.h3 
