@@ -147,7 +147,7 @@ const Home = () => {
       {/* Section Texte */}
       <motion.div 
         variants={containerVariants}
-        className="w-full md:w-1/2 text-center md:text-left px-2 sm:px-4"
+        className="w-full md:w-1/2 text-center md:text-left px-2 sm:px-4 mt-16"
       >
         <motion.h1 
           variants={itemVariants}
