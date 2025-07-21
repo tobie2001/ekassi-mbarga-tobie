@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaCode, FaMedal, FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
-
+import { Briefcase, ExternalLink, X, MapPin, Clock, Code, Rocket, Eye, Sparkles } from 'lucide-react';
 
 const Experience = () => {
   const [selectedExperience, setSelectedExperience] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   const professionalExperiences = [
     {
@@ -20,7 +19,10 @@ const Experience = () => {
       ],
       tags: ["React", "Node.js", "AWS", "GraphQL"],
       image: "/images/rama.png",
-      projectUrl: "https://rama-center.vercel.app/"
+      projectUrl: "https://rama-center.vercel.app/",
+      location: "Yaoundé, Cameroun",
+      status: "En cours",
+      gradient: "from-blue-500 to-purple-600"
     },
     {
       role: "Développeur Frontend",
@@ -34,21 +36,27 @@ const Experience = () => {
       ],
       tags: ["React", "TypeScript", "Redux", "Jest"],
       image: "/images/Post.png",
-      projectUrl: "#"
+      projectUrl: "#",
+      location: "Remote",
+      status: "Terminé",
+      gradient: "from-green-500 to-teal-600"
     },
     {
       role: "Développeur FullStack",
       company: "MacTob",
       period: "2025",
       description: [
-        "Développement d'interfaces utilisateur complexes avec React et ",
+        "Développement d'interfaces utilisateur complexes avec React",
         "Collaboration avec les designers pour implémenter des maquettes Figma",
         "Migration réussie de legacy jQuery vers React sur 15+ projets",
         "Formation des nouveaux développeurs aux bonnes pratiques frontend"
       ],
       tags: ["React", "TypeScript", "Redux", "Jest"],
       image: "/images/macTob.png",
-      projectUrl: "https://mactob.vercel.app/"
+      projectUrl: "https://mactob.vercel.app/",
+      location: "Yaoundé, Cameroun",
+      status: "Terminé",
+      gradient: "from-orange-500 to-red-600"
     },
     {
       role: "Développeur Frontend et backend",
@@ -58,70 +66,51 @@ const Experience = () => {
         "Développement d'interfaces utilisateur complexes avec React et node js",
         "Collaboration avec les designers pour implémenter des maquettes Figma",
         "Migration réussie de legacy jQuery vers React sur 15+ projets",
-        "Site de ventede telephone et machine"
+        "Site de vente de telephone et machine"
       ],
       tags: ["React", "TypeScript", "Redux", "Jest"],
       image: "/images/mkShop.png",
-      projectUrl: "https://mk-tshop.vercel.app/"
+      projectUrl: "https://mk-tshop.vercel.app/",
+      location: "Yaoundé, Cameroun",
+      status: "Terminé",
+      gradient: "from-purple-500 to-pink-600"
+    },
+    {
+      role: "Développeur Full Stack",
+      company: "CrecheImmo",
+      period: "2024 - Présent",
+      description: [
+        "Spécialiste en Investissement locatif & services pour les crèches",
+        "Développement du site vitrine et des outils internes avec Next.js et Framer Motion",
+        "Mise en place d'une interface utilisateur moderne et responsive",
+        "Intégration de contenus dynamiques et animations avancées pour une expérience utilisateur optimale",
+        "Collaboration avec l'équipe pour la gestion des offres immobilières et des services de rénovation"
+      ],
+      tags: ["Next.js", "Framer Motion", "React", "UI/UX"],
+      image: "crecheimmo.jpg",
+      projectUrl: "https://www.crecheimmo.com/",
+      location: "France",
+      status: "En cours",
+      gradient: "from-indigo-500 to-blue-600"
     },
     {
       role: "Stagiaire Développeur",
       company: "CNADI Yaounde",
       period: "2023",
       description: [
-        "Developpement d une application de gestion de patients avec notiffications",
-        "Implementation avec node js pour l envoi rapide des sms et email",
+        "Développement d'une application de gestion de patients avec notifications",
+        "Implémentation avec Node.js pour l'envoi rapide des SMS et email",
         "Optimisation SEO basique et accessibilité",
         "Application de gestion hospitalier"
       ],
-      tags: ["Bootstrap", "Node js", "JavaScript", "Postgres"],
+      tags: ["Bootstrap", "Node.js", "JavaScript", "Postgres"],
       image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      projectUrl: "#"
+      projectUrl: "#",
+      location: "Yaoundé, Cameroun",
+      status: "Terminé",
+      gradient: "from-cyan-500 to-blue-600"
     }
   ];
-
-
-
-  const certifications = [
-    {
-      name: "AWS Certified Developer",
-      issuer: "Amazon Web Services",
-      year: "2022"
-    },
-    {
-      name: "Professional Scrum Master I",
-      issuer: "Scrum.org",
-      year: "2021"
-    },
-    {
-      name: "React Native Expert",
-      issuer: "React Training Institute",
-      year: "2020"
-    }
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100
-      }
-    }
-  };
 
   const openModal = (experience) => {
     setSelectedExperience(experience);
@@ -134,168 +123,246 @@ const Experience = () => {
   };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-gray-50 py-16 px-4 sm:px-6 lg:px-8"
-    >
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-pink-400 to-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-500"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <motion.h2 variants={itemVariants} className="text-4xl font-extrabold text-gray-900 sm:text-5xl mb-4">
-            Mon <span className="text-red-500">Expérience</span>
-          </motion.h2>
-          <motion.p variants={itemVariants} className="max-w-2xl mx-auto text-xl text-gray-600">
-            Un parcours professionnel riche et diversifié dans le développement digital
-          </motion.p>
-        </motion.div>
+        <div className="text-center mb-20">
+          <div className="inline-flex items-center justify-center p-3 bg-white rounded-full shadow-lg mb-6">
+            <Briefcase className="w-8 h-8 text-blue-600" />
+          </div>
+          <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mb-6">
+            Mon Parcours
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Une expertise technique polyvalente forgée à travers des projets innovants 
+            et des défis technologiques stimulants
+          </p>
+        </div>
 
-        {/* Timeline Section */}
-        <div className="mb-20">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="flex items-center mb-8"
-          >
-            <FaBriefcase className="text-3xl text-red-500 mr-4" />
-            <motion.h3 variants={itemVariants} className="text-2xl font-bold text-gray-900">
-              Expérience Professionnelle
-            </motion.h3>
-          </motion.div>
-
-          <div className="space-y-8">
+        {/* Experience Cards Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
             {professionalExperiences.map((exp, index) => (
-              <motion.div
+            <div
                 key={index}
-                variants={itemVariants}
-                className="relative pl-10 pb-8 border-l-2 border-red-500"
-              >
-                <div className="absolute -left-[9px] top-0 w-4 h-4 bg-red-500 rounded-full"></div>
-                <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="flex flex-col md:flex-row gap-6">
-                    <div className="w-full md:w-1/3">
+              className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 ${
+                hoveredCard === index ? 'scale-105' : ''
+              }`}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              {/* Gradient overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+              
+              {/* Status badge */}
+              <div className="absolute top-4 right-4 z-20">
+                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                  exp.status === 'En cours' 
+                    ? 'bg-green-100 text-green-700 border-2 border-green-200' 
+                    : 'bg-gray-100 text-gray-700 border-2 border-gray-200'
+                }`}>
+                  {exp.status === 'En cours' && <div className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></div>}
+                  {exp.status}
+                </span>
+              </div>
+
+              <div className="relative z-10 p-6">
+                {/* Company Image with overlay effect */}
+                <div className="relative overflow-hidden rounded-xl mb-6 group">
                       <img 
                         src={exp.image} 
                         alt={exp.company} 
-                        className="w-full h-48 object-cover rounded-lg"
-                      />
+                    className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-20 mix-blend-overlay`}></div>
+                </div>
+
+                {/* Content */}
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                      {exp.role}
+                    </h3>
+                    <h4 className={`text-lg font-semibold bg-gradient-to-r ${exp.gradient} bg-clip-text text-transparent`}>
+                      {exp.company}
+                    </h4>
+                  </div>
+
+                  {/* Meta information */}
+                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                    <div className="flex items-center">
+                      <Clock className="w-4 h-4 mr-2 text-blue-500" />
+                      {exp.period}
                     </div>
-                    <div className="w-full md:w-2/3">
-                      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                        <h4 className="text-xl font-bold text-gray-900">{exp.role}</h4>
-                        <div className="text-gray-500">{exp.period}</div>
+                    <div className="flex items-center">
+                      <MapPin className="w-4 h-4 mr-2 text-red-500" />
+                      {exp.location}
+                    </div>
                       </div>
-                      <h5 className="text-lg font-semibold text-red-500 mb-4">{exp.company}</h5>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {exp.tags.map((tag, i) => (
-                          <span key={i} className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.tags.slice(0, 3).map((tag, i) => (
+                      <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
                             {tag}
                           </span>
                         ))}
+                    {exp.tags.length > 3 && (
+                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        +{exp.tags.length - 3}
+                      </span>
+                    )}
                       </div>
-                      <div className="flex flex-wrap gap-4 mt-4">
+
+                  {/* Action buttons */}
+                  <div className="flex gap-3 pt-4">
                         <button
                           onClick={() => openModal(exp)}
-                          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors flex items-center"
+                      className={`flex-1 py-3 px-4 bg-gradient-to-r ${exp.gradient} text-white rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center`}
                         >
-                          Voir détails
+                      <Eye className="w-4 h-4 mr-2" />
+                      Détails
                         </button>
-                        {exp.projectUrl && (
+                    {exp.projectUrl && exp.projectUrl !== "#" && (
                           <a
                             href={exp.projectUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
+                        className="py-3 px-4 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center"
                           >
-                            <FaExternalLinkAlt />
-                            Voir le projet
+                        <ExternalLink className="w-4 h-4" />
                           </a>
                         )}
                       </div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+          ))}
+        </div>
+
+        {/* Call to action */}
+        <div className="text-center">
+          <div className="inline-flex items-center justify-center p-4 bg-white rounded-2xl shadow-lg">
+            <Rocket className="w-6 h-6 text-blue-600 mr-3" />
+            <span className="text-lg font-semibold text-gray-800">
+              Prêt pour de nouveaux défis technologiques
+            </span>
           </div>
         </div>
 
-        {/* Education Section */}
-     
-
-        {/* Certifications Section */}
-       
-
-        {/* Modal */}
+        {/* Enhanced Modal */}
         {isModalOpen && selectedExperience && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            >
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900">{selectedExperience.role}</h3>
-                    <h4 className="text-xl text-red-500">{selectedExperience.company}</h4>
-                    <p className="text-gray-500">{selectedExperience.period}</p>
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-40 animate-fadeIn">
+            <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-slideUp">
+              {/* Modal Header */}
+              <div className={`relative p-6 bg-gradient-to-r ${selectedExperience.gradient} text-white`}>
+                <button 
+                  onClick={closeModal}
+                  className="absolute top-4 right-4 text-white/80 hover:text-white hover:bg-white/20 p-2 rounded-full transition-all"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <div className="pr-12">
+                  <h3 className="text-2xl font-bold mb-2">{selectedExperience.role}</h3>
+                  <h4 className="text-xl font-semibold opacity-90 mb-2">{selectedExperience.company}</h4>
+                  <div className="flex items-center gap-4 text-sm opacity-80">
+                    <span className="flex items-center">
+                      <Clock className="w-4 h-4 mr-1" />
+                      {selectedExperience.period}
+                    </span>
+                    <span className="flex items-center">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      {selectedExperience.location}
+                    </span>
                   </div>
-                  <button 
-                    onClick={closeModal}
-                    className="text-gray-500 hover:text-gray-700"
-                  >
-                    <FaTimes className="text-xl" />
-                  </button>
+                </div>
                 </div>
 
+              {/* Modal Content */}
+              <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
                 <img 
                   src={selectedExperience.image} 
                   alt={selectedExperience.company} 
-                  className="w-full h-64 object-cover rounded-lg mb-6"
+                  className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg"
                 />
 
-                <ul className="list-disc pl-5 space-y-2 mb-6 text-gray-700">
+                <div className="space-y-6">
+                  <div>
+                    <h5 className="text-lg font-semibold text-gray-900 mb-3">Missions principales</h5>
+                    <ul className="list-none space-y-3">
                   {selectedExperience.description.map((item, i) => (
-                    <li key={i}>{item}</li>
+                        <li key={i} className="flex items-start">
+                          <div className={`w-2 h-2 bg-gradient-to-r ${selectedExperience.gradient} rounded-full mt-2 mr-3 flex-shrink-0`}></div>
+                          <span className="text-gray-700 leading-relaxed">{item}</span>
+                        </li>
                   ))}
                 </ul>
+                  </div>
 
-                <div className="flex flex-wrap gap-2 mb-6">
+                  <div>
+                    <h5 className="text-lg font-semibold text-gray-900 mb-3">Technologies utilisées</h5>
+                    <div className="flex flex-wrap gap-2">
                   {selectedExperience.tags.map((tag, i) => (
-                    <span key={i} className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
+                        <span 
+                          key={i} 
+                          className={`px-4 py-2 bg-gradient-to-r ${selectedExperience.gradient} text-white rounded-full text-sm font-medium shadow-md`}
+                        >
                       {tag}
                     </span>
                   ))}
+                    </div>
                 </div>
 
-                {selectedExperience.projectUrl && (
+                  {selectedExperience.projectUrl && selectedExperience.projectUrl !== "#" && (
+                    <div className="pt-4 border-t border-gray-200">
                   <a
                     href={selectedExperience.projectUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors gap-2"
+                        className={`inline-flex items-center px-6 py-3 bg-gradient-to-r ${selectedExperience.gradient} text-white rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300`}
                   >
-                    <FaExternalLinkAlt />
+                        <ExternalLink className="w-4 h-4 mr-2" />
                     Voir le projet en ligne
                   </a>
+                    </div>
                 )}
+                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         )}
       </div>
-    </motion.div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { 
+            opacity: 0; 
+            transform: translateY(50px); 
+          }
+          to { 
+            opacity: 1; 
+            transform: translateY(0); 
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+        .animate-slideUp {
+          animation: slideUp 0.4s ease-out;
+        }
+      `}</style>
+    </div>
   );
 };
 

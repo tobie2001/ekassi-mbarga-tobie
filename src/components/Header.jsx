@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -19,6 +19,17 @@ const Header = () => {
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
 
   const navVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -117,7 +128,7 @@ const Header = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className='md:hidden fixed top-20 left-0 right-0 bg-gray-900 bg-opacity-95 p-4 shadow-lg'
+            className='md:hidden fixed top-0 left-0 right-0 bottom-0 bg-gray-900 bg-opacity-95 p-4 pt-20 z-[9999] shadow-lg'
           >
             <nav className='flex flex-col space-y-4'>
               {navList.map((item) => (
