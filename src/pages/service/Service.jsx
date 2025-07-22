@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Code, Smartphone, Palette, Server, TrendingUp, Lightbulb, Check, ArrowRight, Zap, Star, Globe, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Service = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -267,15 +268,15 @@ const Service = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 shadow-lg flex items-center group">
+              <Link to="/contact" className="bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 shadow-lg flex items-center group">
                 <span className="mr-2">Contactez-moi</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
               
-              <button className="border-2 border-white text-white font-semibold px-8 py-4 rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center group">
+              <Link to="/experience" className="border-2 border-white text-white font-semibold px-8 py-4 rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-300 flex items-center group">
                 <span className="mr-2">Voir mes projets</span>
                 <Globe className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-              </button>
+              </Link>
             </div>
 
             {/* Trust Indicators */}
