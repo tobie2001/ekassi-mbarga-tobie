@@ -246,24 +246,20 @@ const Header = () => {
                       className={({ isActive }) => 
                         `group flex items-center text-lg font-medium py-4 px-6 rounded-xl transition-all duration-300 ${
                           isActive 
-                            ? 'bg-gradient-to-r from-red-500 to-pink-600 text-white shadow-lg shadow-red-500/25' 
-                            : 'text-gray-300 hover:text-white hover:bg-gray-800/50 hover:shadow-md'
+                            ? 'bg-gray-800/90 text-white shadow-lg' 
+                            : 'text-gray-300 hover:text-white hover:bg-gray-800/70 hover:shadow-md'
                         }`
                       }
                     >
                       <span className="relative z-10">{item.data}</span>
                       
-                      {/* Effet de brillance */}
-                      <motion.div 
-                        className="absolute inset-0 rounded-xl bg-gradient-to-r from-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100"
-                        transition={{ duration: 0.3 }}
-                      />
+                      {/* Effet de brillance supprimé */}
                       
                       {/* Indicateur pour l'item actif */}
                       {location.pathname === item.path && (
                         <motion.div 
                           layoutId="activeMobileNav"
-                          className="absolute inset-0 bg-gray-800/80 rounded-xl"
+                          className="absolute inset-0 bg-gray-800/90 rounded-xl"
                           transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                       )}
