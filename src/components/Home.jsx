@@ -195,7 +195,7 @@ const Home = () => {
           variants={itemVariants}
           className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 mt-24 md:mt-16 relative"
         >
-          <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80">
+          <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 mx-auto">
             {/* Halo lumineux */}
             <motion.div 
               className="absolute inset-0 bg-gradient-to-r from-red-500 to-purple-500 rounded-full blur-xl opacity-30"
