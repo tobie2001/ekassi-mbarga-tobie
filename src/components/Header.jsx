@@ -209,7 +209,7 @@ const Header = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className='md:hidden fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 z-50 shadow-2xl border-l border-gray-700/50'
+              className='md:hidden fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-gray-900/95 z-50 shadow-2xl border-l border-gray-700/50'
             >
               {/* Header du menu mobile */}
               <div className='flex justify-between items-center p-6 border-b border-gray-700/50'>
@@ -263,7 +263,7 @@ const Header = () => {
                       {location.pathname === item.path && (
                         <motion.div 
                           layoutId="activeMobileNav"
-                          className="absolute inset-0 bg-gradient-to-r from-blue-950-500 to-blue-900-600 rounded-xl"
+                          className="absolute inset-0 bg-gray-800/80 rounded-xl"
                           transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                       )}
