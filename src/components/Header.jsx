@@ -234,7 +234,7 @@ const Header = () => {
               <nav className='flex flex-col p-6 space-y-2'>
                 {navList.map((item, index) => (
                   <motion.div
-                    key={item.id}
+                    key={`mobile-nav-${item.id}`}
                     variants={mobileItemVariants}
                     custom={index}
                     whileHover={{ x: 10 }}
@@ -242,7 +242,11 @@ const Header = () => {
                   >
                     <NavLink 
                       to={item.path}
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={e => {
+                        setIsMobileMenuOpen(false);
+                        // Stop propagation pour éviter tout bug
+                        e.stopPropagation();
+                      }}
                       className={({ isActive }) => 
                         `group flex items-center text-lg font-medium py-4 px-6 rounded-xl transition-all duration-300 ${
                           isActive 
@@ -252,9 +256,6 @@ const Header = () => {
                       }
                     >
                       <span className="relative z-10">{item.data}</span>
-                      
-                      {/* Effet de brillance supprimé */}
-                      
                       {/* Indicateur pour l'item actif */}
                       {location.pathname === item.path && (
                         <motion.div 
@@ -268,8 +269,7 @@ const Header = () => {
                 ))}
               </nav>
               
-              {/* Footer du menu avec effet décoratif */}
-              <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-red-500/10 to-transparent pointer-events-none' />
+              {/* Footer décoratif supprimé pour éviter tout overlay gênant */}
             </motion.div>
           </>
         )}
