@@ -263,7 +263,7 @@ const Header = () => {
                       {location.pathname === item.path && (
                         <motion.div 
                           layoutId="activeMobileNav"
-                          className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-600 rounded-xl"
+                          className="absolute inset-0 bg-gradient-to-r from-blue-950-500 to-blue-900-600 rounded-xl"
                           transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                       )}
