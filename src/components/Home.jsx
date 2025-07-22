@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import HeroImage from "../assets/main.jpg";
+import HeroImage from "../assets/tobie.png";
 import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaRocket, FaCode, FaPalette } from "react-icons/fa";
 import { HiOutlineMail, HiSparkles } from "react-icons/hi";
 
@@ -193,7 +193,7 @@ const Home = () => {
         {/* Section Image avec effets avancés */}
         <motion.div 
           variants={itemVariants}
-          className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 mt-16 md:mt-0 relative"
+          className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 mt-24 md:mt-16 relative"
         >
           <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80">
             {/* Halo lumineux */}
