@@ -259,17 +259,17 @@ const Experience = () => {
 
         {/* Enhanced Modal */}
         {isModalOpen && selectedExperience && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-40 animate-fadeIn">
-            <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-slideUp">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 z-40 animate-fadeIn">
+            <div className="bg-white rounded-2xl w-full max-w-lg sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[95vh] overflow-hidden shadow-2xl animate-slideUp mx-2">
               {/* Modal Header */}
-              <div className={`relative p-6 bg-gradient-to-r ${selectedExperience.gradient} text-white`}>
+              <div className={`relative p-4 sm:p-6 bg-gradient-to-r ${selectedExperience.gradient} text-white`}>
                 <button 
                   onClick={closeModal}
-                  className="absolute top-4 right-4 text-white/80 hover:text-white hover:bg-white/20 p-2 rounded-full transition-all"
+                  className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white/80 hover:text-white hover:bg-white/20 p-2 rounded-full transition-all z-20"
                 >
                   <X className="w-5 h-5" />
                 </button>
-                <div className="pr-12">
+                <div className="pr-8 sm:pr-12">
                   <h3 className="text-2xl font-bold mb-2">{selectedExperience.role}</h3>
                   <h4 className="text-xl font-semibold opacity-90 mb-2">{selectedExperience.company}</h4>
                   <div className="flex items-center gap-4 text-sm opacity-80">
@@ -286,11 +286,11 @@ const Experience = () => {
                 </div>
 
               {/* Modal Content */}
-              <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+              <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(95vh-120px)]">
                 <img 
                   src={selectedExperience.image} 
                   alt={selectedExperience.company} 
-                  className="w-full h-64 object-cover rounded-xl mb-6 shadow-lg"
+                  className="w-full h-40 sm:h-64 object-cover rounded-xl mb-4 sm:mb-6 shadow-lg"
                 />
 
                 <div className="space-y-6">
