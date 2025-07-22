@@ -3,6 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 import HeroImage from "../assets/tobie.png";
 import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaRocket, FaCode, FaPalette } from "react-icons/fa";
 import { HiOutlineMail, HiSparkles } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -369,7 +370,7 @@ const Home = () => {
             variants={itemVariants}
             className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start"
           >
-            <a href="contact">
+            <Link to="/contact">
               <motion.div
                 className="relative overflow-hidden px-6 py-2 sm:px-8 sm:py-3 bg-gradient-to-r from-red-500 to-purple-600 text-white font-medium rounded-xl text-base sm:text-lg transition-all duration-300 text-center flex-1 sm:flex-none group cursor-pointer"
                 whileHover={{ 
@@ -383,9 +384,9 @@ const Home = () => {
                 />
                 <span className="relative z-10">Me contacter</span>
               </motion.div>
-            </a>
+            </Link>
             
-            <a href="/experience">
+            <Link to="/experience">
               <motion.div
                 className="relative overflow-hidden px-6 py-2 sm:px-8 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium rounded-xl text-base sm:text-lg transition-all duration-300 text-center flex-1 sm:flex-none group cursor-pointer"
                 whileHover={{ 
@@ -399,7 +400,7 @@ const Home = () => {
                 />
                 <span className="relative z-10">Voir mes projets</span>
               </motion.div>
-            </a>
+            </Link>
             
             <motion.button
               onClick={handleDownloadCV}
