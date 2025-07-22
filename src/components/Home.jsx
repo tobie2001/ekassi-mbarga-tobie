@@ -276,7 +276,7 @@ const Home = () => {
             variants={itemVariants}
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 text-white leading-tight"
           >
-            Salut, je suis{" "}
+           
             <motion.span 
               className="bg-gradient-to-r from-red-400 via-purple-500 to-blue-500 bg-clip-text text-transparent text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
               animate={{
@@ -297,7 +297,7 @@ const Home = () => {
             className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-gray-300 flex items-center justify-center md:justify-start gap-2"
           >
             <HiSparkles className="text-yellow-400 animate-pulse" />
-            <span>Je suis</span>
+          
             <motion.span
               className="inline-block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-lg sm:text-xl md:text-2xl lg:text-3xl"
               animate={{

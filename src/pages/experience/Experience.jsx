@@ -147,15 +147,16 @@ const Experience = () => {
         </div>
 
         {/* Experience Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-20">
             {professionalExperiences.map((exp, index) => (
             <div
                 key={index}
-              className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 ${
-                hoveredCard === index ? 'scale-105' : ''
-              }`}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
+                className={`group relative bg-white rounded-2xl shadow-lg transition-all duration-500 overflow-hidden w-full max-w-full mx-auto
+                  ${hoveredCard === index ? 'scale-105' : ''}
+                  ${typeof window !== 'undefined' && window.innerWidth < 640 ? '' : 'hover:shadow-2xl hover:-translate-y-2'}`}
+                style={{ maxWidth: '100%' }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
@@ -172,13 +173,13 @@ const Experience = () => {
                 </span>
               </div>
 
-              <div className="relative z-10 p-6">
+              <div className="relative z-10 p-3 sm:p-6">
                 {/* Company Image with overlay effect */}
-                <div className="relative overflow-hidden rounded-xl mb-6 group">
-                      <img 
-                        src={exp.image} 
-                        alt={exp.company} 
-                    className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                <div className="relative overflow-hidden rounded-xl mb-4 sm:mb-6 group">
+                  <img 
+                    src={exp.image} 
+                    alt={exp.company} 
+                    className="w-full h-32 sm:h-48 object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-20 mix-blend-overlay`}></div>
@@ -259,13 +260,14 @@ const Experience = () => {
 
         {/* Enhanced Modal */}
         {isModalOpen && selectedExperience && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 z-40 animate-fadeIn">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 z-[999] animate-fadeIn mt-48">
             <div className="bg-white rounded-2xl w-full max-w-lg sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[95vh] overflow-hidden shadow-2xl animate-slideUp mx-2">
               {/* Modal Header */}
               <div className={`relative p-4 sm:p-6 bg-gradient-to-r ${selectedExperience.gradient} text-white`}>
                 <button 
                   onClick={closeModal}
-                  className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white/80 hover:text-white hover:bg-white/20 p-2 rounded-full transition-all z-20"
+                  className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white/80 hover:text-white hover:bg-white/20 p-2 rounded-full transition-all z-[1000] bg-black/30 backdrop-blur"
+                  style={{ pointerEvents: 'auto' }}
                 >
                   <X className="w-5 h-5" />
                 </button>

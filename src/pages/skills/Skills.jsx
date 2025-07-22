@@ -98,8 +98,8 @@ const Skills = () => {
   ];
 
   const stats = [
-    { number: "5+", label: "Années d'expérience", icon: <Award className="w-6 h-6" /> },
-    { number: "20+", label: "Technologies maîtrisées", icon: <Brain className="w-6 h-6" /> },
+    { number: "3+", label: "Années d'expérience", icon: <Award className="w-6 h-6" /> },
+    { number: "6+", label: "Technologies maîtrisées", icon: <Brain className="w-6 h-6" /> },
     { number: "95%", label: "Taux de réussite projet", icon: <Target className="w-6 h-6" /> }
   ];
 
