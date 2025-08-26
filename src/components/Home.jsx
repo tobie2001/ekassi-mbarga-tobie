@@ -67,7 +67,11 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
+      {/* Header wrapper for z-index fix */}
+      <div className="fixed top-0 left-0 w-full z-[100]">
+        {/* Place Header here if not already rendered globally */}
+      </div>
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div 
