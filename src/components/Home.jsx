@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import React, { useState, useEffect } from "react";
 import HeroImage from "../assets/tobie.png";
-import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaRocket, FaCode, FaPalette } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaCode, FaPalette, FaRocket, FaArrowRight, FaPlay } from "react-icons/fa";
 import { HiOutlineMail, HiSparkles } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const controls = useAnimation();
 
   useEffect(() => {
+    setIsVisible(true);
+    
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
@@ -27,130 +29,32 @@ const Home = () => {
   ];
 
   const skills = [
-    { icon: <FaCode />, text: "Full-Stack", color: "#60A5FA" },
-    { icon: <FaPalette />, text: "Design", color: "#F472B6" },
-    { icon: <FaRocket />, text: "Innovation", color: "#34D399" }
+    { icon: <FaCode />, text: "Full-Stack Development", color: "#3B82F6", description: "Applications web complètes" },
+    { icon: <FaPalette />, text: "UI/UX Design", color: "#8B5CF6", description: "Expériences utilisateur" },
+    { icon: <FaRocket />, text: "Innovation & Strategy", color: "#10B981", description: "Solutions créatives" }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
+  const technologies = [
+    { name: 'React', category: 'Frontend', level: 95 },
+    { name: 'Node.js', category: 'Backend', level: 90 },
+    { name: 'Python', category: 'Backend', level: 85 },
+    { name: 'PHP', category: 'Backend', level: 88 },
+    { name: 'MySQL', category: 'Database', level: 82 },
+    { name: 'MongoDB', category: 'Database', level: 80 },
+    { name: 'JavaScript', category: 'Frontend', level: 98 },
+    { name: 'TypeScript', category: 'Frontend', level: 85 },
+    { name: 'Laravel', category: 'Framework', level: 87 },
+    { name: 'Express', category: 'Framework', level: 90 },
+    { name: 'Tailwind', category: 'Styling', level: 95 },
+    { name: 'Bootstrap', category: 'Styling', level: 90 }
+  ];
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
-
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      rotate: [-5, 5, -5],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
-  const orbitVariants = {
-    animate: {
-      rotate: 360,
-      transition: {
-        duration: 25,
-        repeat: Infinity,
-        ease: "linear"
-      }
-    }
-  };
-
-  const particleVariants = {
-    animate: (i) => ({
-      y: [0, -100, 0],
-      x: [0, Math.random() * 100 - 50, 0],
-      opacity: [0, 1, 0],
-      scale: [0, 1, 0],
-      transition: {
-        duration: 4 + Math.random() * 4,
-        repeat: Infinity,
-        delay: i * 0.5,
-        ease: "easeOut"
-      }
-    })
-  };
-
-  const createOrbitingElements = () => {
-    const elements = [];
-    const count = 8;
-    const radius = window.innerWidth < 768 ? 160 : 300;
-
-    for (let i = 0; i < count; i++) {
-      const angle = (i * 360) / count;
-      const x = radius * Math.cos((angle * Math.PI) / 180);
-      const y = radius * Math.sin((angle * Math.PI) / 180);
-
-      elements.push(
-        <motion.div
-          key={i}
-          className="absolute"
-          style={{
-            left: `calc(50% + ${x}px)`,
-            top: `calc(50% + ${y}px)`,
-            transform: 'translate(-50%, -50%)'
-          }}
-          initial={{ scale: 0 }}
-          animate={{
-            scale: [0.8, 1.2, 0.8],
-            opacity: [0.3, 0.8, 0.3],
-            backgroundColor: i % 2 === 0 ? "#EF4444" : "#3B82F6",
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            delay: i * 0.3
-          }}
-        >
-          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-red-500 to-blue-500 shadow-lg" />
-        </motion.div>
-      );
-    }
-    return elements;
-  };
-
-  const createFloatingParticles = () => {
-    const particles = [];
-    for (let i = 0; i < 6; i++) {
-      particles.push(
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          variants={particleVariants}
-          animate="animate"
-          custom={i}
-        />
-      );
-    }
-    return particles;
-  };
+  const stats = [
+    { value: "30+", label: "Projets Complétés", icon: "🚀" },
+    { value: "3+", label: "Années d'Expérience", icon: "⭐" },
+    { value: "30+", label: "Clients Satisfaits", icon: "😊" },
+    { value: "24/7", label: "Support Disponible", icon: "💬" }
+  ];
 
   const handleDownloadCV = () => {
     const cvUrl = '/documents/cv.pdf';
@@ -163,268 +67,291 @@ const Home = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900">
-      {/* Curseur personnalisé et effet de suivi */}
-      <motion.div
-        className="fixed top-0 left-0 w-6 h-6 bg-gradient-to-r from-red-500 to-purple-500 rounded-full pointer-events-none z-50 mix-blend-difference"
-        animate={{
-          x: mousePosition.x - 12,
-          y: mousePosition.y - 12,
-        }}
-        transition={{ type: "spring", stiffness: 500, damping: 28 }}
-      />
-
-      {/* Particules flottantes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {createFloatingParticles()}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div 
+          className="absolute w-96 h-96 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl animate-pulse"
+          style={{
+            left: mousePosition.x / 10,
+            top: mousePosition.y / 10,
+          }}
+        ></div>
+        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-gradient-to-r from-pink-400/10 to-yellow-400/10 rounded-full blur-3xl animate-bounce"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-green-400/10 to-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
       </div>
 
-      {/* Grille de fond animée */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_24%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05)_76%,transparent_77%,transparent),linear-gradient(0deg,transparent_24%,rgba(255,255,255,0.05)_25%,rgba(255,255,255,0.05)_26%,transparent_27%,transparent_74%,rgba(255,255,255,0.05)_75%,rgba(255,255,255,0.05)_76%,transparent_77%,transparent)] bg-[length:60px_60px]" />
-      </div>
-
-      <motion.section 
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-12"
-        id="home"
-      >
-        {/* Section Image avec effets avancés */}
-        <motion.div 
-          variants={itemVariants}
-          className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 mt-24 md:mt-16 relative"
-        >
-          <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 mx-auto">
-            {/* Halo lumineux */}
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-red-500 to-purple-500 rounded-full blur-xl opacity-30"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-
-            {/* Éléments orbitaux */}
-            <motion.div 
-              className="absolute inset-0 w-full h-full"
-              variants={orbitVariants}
-              animate="animate"
-            >
-              {createOrbitingElements()}
-            </motion.div>
-            
-            {/* Image principale avec effets glassmorphism */}
-            <motion.div
-              className="relative z-10 w-full h-full rounded-full overflow-hidden"
-              variants={floatingVariants}
-              animate="animate"
-            >
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent rounded-full border border-white/30" />
-              <motion.img
-                src={HeroImage}
-                alt="MBARGA EKASSI TOBIE"
-                className="w-full h-full object-cover rounded-full"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              />
-            </motion.div>
-
-            {/* Anneaux décoratifs */}
-            <motion.div 
-              className="absolute inset-0 border-2 border-gradient-to-r from-red-500 to-transparent rounded-full"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            />
-            <motion.div 
-              className="absolute inset-0 border-2 border-gradient-to-l from-purple-500 to-transparent rounded-full"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            />
-          </div>
-        </motion.div>
-
-        {/* Section Texte améliorée */}
-        <motion.div 
-          variants={containerVariants}
-          className="w-full md:w-1/2 text-center md:text-left px-2 sm:px-4 mt-16"
-        >
-          {/* Badges de compétences */}
-          <motion.div 
-            variants={itemVariants}
-            className="flex justify-center md:justify-start gap-2 mb-4"
-          >
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center gap-1 px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-sm border border-white/20"
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}
-                style={{ color: skill.color }}
-              >
-                {skill.icon}
-                <span className="text-white">{skill.text}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.h1 
-            variants={itemVariants}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 text-white leading-tight"
-          >
-           
-            <motion.span 
-              className="bg-gradient-to-r from-red-400 via-purple-500 to-blue-500 bg-clip-text text-transparent text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: 'linear'
-              }}
-            >
-              MBARGA EKASSI TOBIE
-            </motion.span>
-          </motion.h1>
-
-          <motion.h3 
-            variants={itemVariants}
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-6 text-gray-300 flex items-center justify-center md:justify-start gap-2"
-          >
-            <HiSparkles className="text-yellow-400 animate-pulse" />
-          
-            <motion.span
-              className="inline-block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent text-lg sm:text-xl md:text-2xl lg:text-3xl"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'linear'
-              }}
-            >
-              Développeur Web Full-Stack
-            </motion.span>
-          </motion.h3>
-
-          <motion.p 
-            variants={itemVariants}
-            className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 md:mb-8 text-gray-300 leading-relaxed max-w-2xl mx-auto md:mx-0 backdrop-blur-sm bg-white/5 p-4 rounded-xl border border-white/10"
-          >
-            Expert en développement web et design numérique, je m'épanouis dans la création de solutions digitales innovantes.
-            Mon expertise s'étend du développement Full-Stack à la conception graphique, en passant par la création d'applications
-            web, mobiles et bureautiques. Je combine une approche technique rigoureuse avec une sensibilité artistique pour
-            concevoir des expériences utilisateur exceptionnelles et des interfaces modernes.
-          </motion.p>
-
-          {/* Icônes sociales améliorées */}
-          <motion.div 
-            variants={itemVariants}
-            className="flex justify-center md:justify-start space-x-3 sm:space-x-4 mb-6 md:mb-8"
-          >
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative group p-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20 text-xl sm:text-2xl text-gray-300 transition-all duration-300"
-                whileHover={{ 
-                  y: -5, 
-                  scale: 1.1,
-                  backgroundColor: "rgba(255,255,255,0.2)"
-                }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={social.name}
-                title={social.name}
-              >
-                <motion.div
-                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{
-                    background: `linear-gradient(45deg, ${social.color}, transparent)`
-                  }}
-                />
-                <span className="relative z-10">{social.icon}</span>
+      {/* Hero Section */}
+      <section id="home" className="relative pt-16 sm:pt-20 pb-12 sm:pb-16 lg:pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-12 items-center">
+            {/* Profile Image - First on mobile, second on desktop */}
+            <div className="order-1 lg:order-2 mt-8 sm:mt-12 lg:mt-0 lg:col-span-5 mb-8 lg:mb-0">
+              <div className={`relative transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95'}`}>
+                {/* Animated Background Elements */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-3xl transform rotate-6 animate-pulse"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl transform -rotate-6 animate-pulse delay-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl transform rotate-3 animate-pulse delay-700"></div>
                 
-                {/* Tooltip */}
-                <motion.div
-                  className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black text-white px-2 py-1 rounded text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap"
-                  initial={{ y: 10, opacity: 0 }}
-                  whileHover={{ y: 0, opacity: 1 }}
-                >
-                  {social.name}
-                </motion.div>
-              </motion.a>
-            ))}
-          </motion.div>
+                {/* Main Image Container */}
+                <div className="relative bg-white/90 backdrop-blur-sm p-2 sm:p-3 rounded-3xl shadow-2xl border border-white/20">
+                  <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                    <img
+                      src={HeroImage}
+                      alt="MBARGA EKASSI TOBIE"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                      loading="eager"
+                    />
+                  </div>
+                </div>
 
-          {/* Boutons d'action modernisés */}
-          <motion.div 
-            variants={itemVariants}
-            className="flex flex-wrap gap-3 sm:gap-4 justify-center md:justify-start"
-          >
+                {/* Floating Stats Cards */}
+                <div className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 bg-white/90 backdrop-blur-sm p-3 sm:p-4 rounded-2xl shadow-xl border border-white/20 animate-float">
+                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">5+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Années d'expérience</div>
+                </div>
+
+                <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 bg-white/90 backdrop-blur-sm p-3 sm:p-4 rounded-2xl shadow-xl border border-white/20 animate-float delay-500">
+                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">50+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Projets réalisés</div>
+                </div>
+
+                {/* Additional floating element */}
+                <div className="absolute top-1/2 -right-4 sm:-right-6 bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg animate-bounce">
+                  <HiSparkles className="text-white text-lg sm:text-xl" />
+                </div>
+              </div>
+            </div>
+
+            {/* Content - Second on mobile, first on desktop */}
+            <div className="order-2 lg:order-1 lg:col-span-7">
+              <div className="max-w-3xl">
+                {/* Status Badge */}
+                <div className={`inline-flex items-center px-3 sm:px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                  <HiSparkles className="mr-1" />
+                  Disponible pour de nouveaux projets
+                </div>
+
+                {/* Main Heading */}
+                <div className={`transform transition-all duration-700 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight mb-4 sm:mb-6">
+                    <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent">
+                      MBARGA EKASSI
+                    </span>
+                    <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-pulse">
+                      TOBIE
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Subtitle */}
+                <div className={`transform transition-all duration-700 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-600 font-medium mb-4 sm:mb-6 leading-relaxed">
+                    <span className="text-blue-600 font-semibold">Développeur Web Full-Stack</span>
+                    <span className="text-gray-500"> & </span>
+                    <span className="text-purple-600 font-semibold">Designer</span>
+                  </h2>
+                </div>
+
+                {/* Description */}
+                <div className={`transform transition-all duration-700 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed mb-6 sm:mb-8 max-w-2xl">
+                    Expert en développement web et design numérique, je crée des 
+                    <span className="text-blue-600 font-semibold"> solutions digitales innovantes</span> qui allient 
+                    technique rigoureuse et esthétique moderne pour des expériences utilisateur exceptionnelles.
+                  </p>
+                </div>
+
+                {/* Skills */}
+                <div className={`transform transition-all duration-700 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                    {skills.map((skill, index) => (
+                      <div
+                        key={index}
+                        className="group bg-white/80 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/50 hover:border-blue-300/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 group-hover:from-blue-100 group-hover:to-purple-100 transition-colors">
+                            <span style={{ color: skill.color }} className="text-lg">{skill.icon}</span>
+                          </div>
+                          <div>
+                            <div className="font-medium text-gray-800 text-sm sm:text-base">{skill.text}</div>
+                            <div className="text-xs sm:text-sm text-gray-500 mt-1">{skill.description}</div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className={`transform transition-all duration-700 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8">
+                    <Link to="/contact">
+                      <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                        Me contacter
+                        <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+                      </button>
+                    </Link>
+                    
+                    <Link to="/experience">
+                      <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-blue-300 text-gray-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                        <FaPlay className="text-blue-600" />
+                        Voir mes projets
+                      </button>
+                    </Link>
+                    
+                    <button
+                      onClick={handleDownloadCV}
+                      className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 border-2 border-green-200 hover:border-green-400 text-green-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      <FaFileDownload className="group-hover:animate-bounce" />
+                      Télécharger CV
+                    </button>
+                  </div>
+                </div>
+
+                {/* Social Links */}
+                <div className={`transform transition-all duration-700 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="flex flex-wrap gap-3 sm:gap-4">
+                    {socialLinks.map((social, index) => (
+                      <a
+                        key={index}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group p-3 sm:p-4 bg-white/80 backdrop-blur-sm text-gray-600 hover:text-white rounded-xl border border-gray-200/50 hover:border-transparent shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                        style={{ '--hover-color': social.color }}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = social.color;
+                          e.target.style.borderColor = social.color;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = '';
+                          e.target.style.borderColor = '';
+                        }}
+                        aria-label={social.name}
+                        title={social.name}
+                      >
+                        <span className="text-lg sm:text-xl">{social.icon}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-12 sm:py-16 bg-white/50 backdrop-blur-sm border-y border-gray-200/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center group">
+                <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl border border-gray-200/50 hover:border-blue-300/50 transform hover:-translate-y-2 transition-all duration-300">
+                  <div className="text-2xl mb-2">{stat.icon}</div>
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm sm:text-base text-gray-600 leading-relaxed">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-4 sm:mb-6">
+              Technologies & Outils
+            </h2>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Une expertise technique diversifiée pour répondre à tous vos besoins de développement
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6">
+            {technologies.map((tech, index) => (
+              <div 
+                key={index} 
+                className="group bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl text-center border border-gray-200/50 hover:border-blue-300/50 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+              >
+                <div className="text-sm sm:text-base font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                  {tech.name}
+                </div>
+                <div className="text-xs text-gray-500 mb-3">{tech.category}</div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-700 group-hover:from-blue-600 group-hover:to-purple-600" 
+                    style={{ width: `${tech.level}%` }}
+                  ></div>
+                </div>
+                <div className="text-xs text-gray-500 mt-1">{tech.level}%</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
+        {/* Background Animation */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-600/10 to-purple-600/10 animate-pulse"></div>
+          <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-to-l from-pink-500/20 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-transparent rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+            Prêt à donner vie à votre projet ?
+          </h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 lg:mb-10 max-w-3xl mx-auto leading-relaxed">
+            Collaborons ensemble pour créer quelque chose d'extraordinaire qui fera la différence pour votre entreprise.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
             <Link to="/contact">
-              <motion.div
-                className="relative overflow-hidden px-6 py-2 sm:px-8 sm:py-3 bg-gradient-to-r from-red-500 to-purple-600 text-white font-medium rounded-xl text-base sm:text-lg transition-all duration-300 text-center flex-1 sm:flex-none group cursor-pointer"
-                whileHover={{ 
-                  y: -3, 
-                  boxShadow: "0 10px 30px rgba(239, 68, 68, 0.4)" 
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-purple-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
-                <span className="relative z-10">Me contacter</span>
-              </motion.div>
+              <button className="group w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                Commencer un projet
+                <FaRocket className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </button>
             </Link>
-            
             <Link to="/experience">
-              <motion.div
-                className="relative overflow-hidden px-6 py-2 sm:px-8 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium rounded-xl text-base sm:text-lg transition-all duration-300 text-center flex-1 sm:flex-none group cursor-pointer"
-                whileHover={{ 
-                  y: -3, 
-                  backgroundColor: "rgba(255,255,255,0.2)" 
-                }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-                />
-                <span className="relative z-10">Voir mes projets</span>
-              </motion.div>
+              <button className="group w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 border-2 border-white/30 hover:border-white/50 text-white hover:bg-white/10 font-semibold rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2">
+                <FaPlay className="group-hover:text-blue-400 transition-colors" />
+                Découvrir mes réalisations
+              </button>
             </Link>
-            
-            <motion.button
-              onClick={handleDownloadCV}
-              className="relative overflow-hidden px-6 py-2 sm:px-8 sm:py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-medium rounded-xl text-base sm:text-lg transition-all duration-300 flex items-center justify-center gap-2 flex-1 sm:flex-none group"
-              whileHover={{ 
-                y: -3, 
-                backgroundColor: "rgba(255,255,255,0.2)" 
-              }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-              />
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              >
-                <FaFileDownload className="text-lg" />
-              </motion.div>
-              <span className="relative z-10">Télécharger CV</span>
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      </motion.section>
+          </div>
+        </div>
+      </section>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-float.delay-500 {
+          animation-delay: 0.5s;
+        }
+        
+        @media (max-width: 640px) {
+          .animate-float {
+            animation: float 2s ease-in-out infinite;
+          }
+        }
+      `}</style>
     </div>
   );
 };

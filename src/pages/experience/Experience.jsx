@@ -25,6 +25,23 @@ const Experience = () => {
       gradient: "from-blue-500 to-purple-600"
     },
     {
+      role: "Développeur Full Stack",
+      company: "topShop",
+      period: "2025",
+      description: [
+        "Création d'une plateforme e-commerce moderne et responsive.",
+        "Développement du frontend avec React et Tailwind CSS pour une expérience utilisateur fluide.",
+        "Mise en place du backend avec MongoDB pour la gestion des produits et des utilisateurs.",
+        "Déploiement sur Vercel pour une accessibilité optimale."
+      ],
+      tags: ["React", "Tailwind CSS", "MongoDB"],
+      image: "/images/topshop.png",
+      projectUrl: "https://top-shop-rho.vercel.app/",
+      location: "Remote",
+      status: "Terminé",
+      gradient: "from-yellow-500 to-orange-600"
+    },
+    {
       role: "Développeur Frontend",
       company: "POS",
       period: "2023 - 2024",
@@ -92,7 +109,7 @@ const Experience = () => {
       location: "France",
       status: "En cours",
       gradient: "from-indigo-500 to-blue-600"
-    },
+  },
     {
       role: "Stagiaire Développeur",
       company: "CNADI Yaounde",
@@ -109,7 +126,25 @@ const Experience = () => {
       location: "Yaoundé, Cameroun",
       status: "Terminé",
       gradient: "from-cyan-500 to-blue-600"
-    }
+    },
+    {
+      role: "Développeur Full Stack",
+      company: "Générateur de CV",
+      period: "2025",
+      description: [
+        "Développement d'un générateur de CV interactif et moderne.",
+        "Utilisation de React pour le frontend et Node.js pour le backend.",
+        "Intégration de Tailwind CSS pour une interface responsive et élégante.",
+        "Permet la création, la personnalisation et le téléchargement de CV en ligne.",
+        "Déploiement sur Vercel pour une accessibilité mondiale."
+      ],
+      tags: ["React", "Node.js", "Tailwind CSS"],
+      image: "/images/cvbuilder.png",
+      projectUrl: "https://cv-website-tau.vercel.app/",
+      location: "Remote",
+      status: "Terminé",
+  gradient: "from-cyan-500 to-blue-600",
+    },
   ];
 
   const openModal = (experience) => {
