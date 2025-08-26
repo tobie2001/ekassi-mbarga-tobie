@@ -100,8 +100,8 @@ const Header = () => {
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
       className={`fixed w-full max-w-[100vw] overflow-x-hidden flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-16 py-4 z-50 transition-all duration-500 ${
         scrolled 
-          ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl border-b border-gray-700/30' 
-          : 'bg-gray-900/90 backdrop-blur-sm'
+          ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl border-b border-gray-700/30 z-50' 
+          : 'bg-gray-900/90 backdrop-blur-sm z-50'
       }`}
     >
       {/* Logo avec effet de gradient */}
@@ -112,7 +112,7 @@ const Header = () => {
       >
         <NavLink 
           to="/"
-          className='text-2xl sm:text-3xl font-black bg-gradient-to-r from-red-500 via-pink-500 to-red-600 bg-clip-text text-transparent hover:from-red-400 hover:via-pink-400 hover:to-red-500 transition-all duration-300'
+          className='text-2xl sm:text-3xl font-black bg-gradient-to-r from-red-500 via-pink-500 to-red-600 bg-clip-text text-transparent hover:from-red-400 hover:via-pink-400 hover:to-red-500 transition-all duration-300 z-50'
           style={{ 
             textShadow: '0 0 30px rgba(239, 68, 68, 0.3)',
             filter: 'drop-shadow(0 0 10px rgba(239, 68, 68, 0.2))'
@@ -132,7 +132,7 @@ const Header = () => {
         variants={navVariants}
         initial="hidden"
         animate="visible"
-        className='hidden md:flex bg-gray-800/30 backdrop-blur-sm rounded-full px-6 py-2 border border-gray-700/50'
+        className='hidden md:flex bg-gray-800/30 backdrop-blur-sm rounded-full px-6 py-2 border border-gray-700/50 z-50'
       >
         {navList.map((item) => (
           <motion.div 
@@ -146,8 +146,8 @@ const Header = () => {
               className={({ isActive }) => 
                 `relative text-sm lg:text-base font-semibold px-4 py-2 rounded-full transition-all duration-300 ${
                   isActive 
-                    ? 'text-white bg-gradient-to-r from-red-500 to-pink-600 shadow-lg shadow-red-500/25' 
-                    : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
+                    ? 'text-white bg-gradient-to-r from-red-500 to-pink-600 shadow-lg shadow-red-500/25 z-50' 
+                    : 'text-gray-300 hover:text-white hover:bg-gray-700/50 z-50'
                 }`
               }
             >
