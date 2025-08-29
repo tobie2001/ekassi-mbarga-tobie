@@ -38,12 +38,12 @@ const Home = () => {
     { name: 'React', category: 'Frontend', level: 95 },
     { name: 'Node.js', category: 'Backend', level: 90 },
     { name: 'Python', category: 'Backend', level: 85 },
-    { name: 'PHP', category: 'Backend', level: 88 },
+   
     { name: 'MySQL', category: 'Database', level: 82 },
     { name: 'MongoDB', category: 'Database', level: 80 },
     { name: 'JavaScript', category: 'Frontend', level: 98 },
     { name: 'TypeScript', category: 'Frontend', level: 85 },
-    { name: 'Laravel', category: 'Framework', level: 87 },
+
     { name: 'Express', category: 'Framework', level: 90 },
     { name: 'Tailwind', category: 'Styling', level: 95 },
     { name: 'Bootstrap', category: 'Styling', level: 90 }
