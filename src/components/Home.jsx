@@ -111,7 +111,7 @@ const Home = () => {
 
                 {/* Floating Stats Cards */}
                 <div className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 bg-white/90 backdrop-blur-sm p-3 sm:p-4 rounded-2xl shadow-xl border border-white/20 animate-float">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">5+</div>
+                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">3+</div>
                   <div className="text-xs sm:text-sm text-gray-600">Années d'expérience</div>
                 </div>
 
