@@ -38,12 +38,10 @@ const Home = () => {
     { name: 'React', category: 'Frontend', level: 95 },
     { name: 'Node.js', category: 'Backend', level: 90 },
     { name: 'Python', category: 'Backend', level: 85 },
-   
     { name: 'MySQL', category: 'Database', level: 82 },
     { name: 'MongoDB', category: 'Database', level: 80 },
     { name: 'JavaScript', category: 'Frontend', level: 98 },
     { name: 'TypeScript', category: 'Frontend', level: 85 },
-
     { name: 'Express', category: 'Framework', level: 90 },
     { name: 'Tailwind', category: 'Styling', level: 95 },
     { name: 'Bootstrap', category: 'Styling', level: 90 }
@@ -57,49 +55,36 @@ const Home = () => {
   ];
 
   const handleDownloadCV = () => {
-    const cvUrl = '/documents/cv.pdf';
-    const link = document.createElement('a');
-    link.href = cvUrl;
-    link.download = 'CV_Tobie_Mbarga.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Logique pour télécharger le CV
+    console.log("Téléchargement du CV...");
+    // Vous pouvez ajouter ici la logique pour télécharger votre fichier CV
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
-      {/* Header wrapper for z-index fix */}
-      <div className="fixed top-0 left-0 w-full z-[100]">
-        {/* Place Header here if not already rendered globally */}
-      </div>
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div 
-          className="absolute w-96 h-96 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl animate-pulse"
-          style={{
-            left: mousePosition.x / 10,
-            top: mousePosition.y / 10,
-          }}
-        ></div>
-        <div className="absolute top-1/4 right-1/4 w-72 h-72 bg-gradient-to-r from-pink-400/10 to-yellow-400/10 rounded-full blur-3xl animate-bounce"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-green-400/10 to-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
-      </div>
-
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
       {/* Hero Section */}
-      <section id="home" className="relative pt-16 sm:pt-20 pb-12 sm:pb-16 lg:pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-8 xl:gap-12 items-center">
-            {/* Profile Image - First on mobile, second on desktop */}
-            <div className="order-1 lg:order-2 mt-8 sm:mt-12 lg:mt-0 lg:col-span-5 mb-8 lg:mb-0">
-              <div className={`relative transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95'}`}>
-                {/* Animated Background Elements */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-3xl transform rotate-6 animate-pulse"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-3xl transform -rotate-6 animate-pulse delay-300"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl transform rotate-3 animate-pulse delay-700"></div>
-                
+      <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-blue-200/30 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-r from-purple-200/30 to-transparent rounded-full blur-3xl"></div>
+          <div 
+            className="absolute w-6 h-6 bg-blue-400/20 rounded-full blur-sm transition-all duration-300"
+            style={{
+              left: `${mousePosition.x * 0.02}px`,
+              top: `${mousePosition.y * 0.02}px`,
+            }}
+          ></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+            {/* Image - First on mobile, second on desktop */}
+            <div className="order-1 lg:order-2 lg:col-span-5">
+              <div className="relative max-w-sm sm:max-w-md lg:max-w-lg mx-auto">
                 {/* Main Image Container */}
-                <div className="relative bg-white/90 backdrop-blur-sm p-2 sm:p-3 rounded-3xl shadow-2xl border border-white/20">
-                  <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                <div className="relative">
+                  <div className="aspect-square rounded-3xl sm:rounded-[3rem] overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 shadow-2xl border-4 sm:border-8 border-white/50 backdrop-blur-sm">
                     <img
                       src={HeroImage}
                       alt="MBARGA EKASSI TOBIE"
@@ -206,6 +191,13 @@ const Home = () => {
                       </button>
                     </Link>
                     
+                    <Link to="/gallerie">
+                      <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 border-2 border-purple-200 hover:border-purple-400 text-purple-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                        <FaPalette className="text-purple-600" />
+                        Voir la Gallerie
+                      </button>
+                    </Link>
+                    
                     <button
                       onClick={handleDownloadCV}
                       className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 border-2 border-green-200 hover:border-green-400 text-green-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
@@ -280,7 +272,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
             {technologies.map((tech, index) => (
               <div 
                 key={index} 

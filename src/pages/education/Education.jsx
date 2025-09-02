@@ -1,8 +1,19 @@
+
+// =============================
+// Composant Education.jsx
+// SEO : Parcours académique de Ekassi Mbarga Tobie
+// Mots-clés : éducation, diplôme, université, compétences, recherche, analyse, rédaction, gestion de projet, Ekassi Mbarga Tobie
+// Description : Affiche le parcours académique, les diplômes et les compétences clés de Ekassi Mbarga Tobie pour un meilleur référencement naturel (SEO).
+// =============================
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { GraduationCap, University, Award, Book, Trophy, Code, Users, Lightbulb } from 'lucide-react';
 
 const Education = () => {
+  // =============================
+  // Données de formation et compétences pour affichage et SEO
+  // =============================
   const educationData = [
     {
       degree: "Licence de Technologie",
@@ -57,6 +68,12 @@ const Education = () => {
 
   return (
     <>
+      {/*
+        =============================
+        SEO Helmet : Balises meta pour le référencement naturel
+        Titre, description et mots-clés optimisés pour Google et moteurs de recherche
+        =============================
+      */}
       <Helmet>
         <title>Parcours académique | Ekassi Mbarga Tobie</title>
         <meta name="description" content="Découvrez le parcours académique de Ekassi Mbarga Tobie : Licence, DUT, Baccalauréat, compétences en recherche scientifique, analyse de données, rédaction technique et gestion de projet." />
@@ -64,7 +81,12 @@ const Education = () => {
       </Helmet>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Header Section avec animation améliorée */}
+          {/*
+            =============================
+            Section d'en-tête (Header) avec titre et résumé du parcours
+            Utilisation de balises sémantiques et classes utilitaires pour l'accessibilité et le SEO
+            =============================
+          */}
           <div className="text-center mb-20">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
               <GraduationCap className="w-8 h-8 text-white" />
@@ -81,4 +103,7 @@ const Education = () => {
       </div>
     </>
   );
+
 };
+
+export default Education;

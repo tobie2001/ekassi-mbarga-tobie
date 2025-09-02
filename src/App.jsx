@@ -9,6 +9,7 @@ import Experience from "./pages/experience/Experience";
 import Contact from "./pages/contact/Contact";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
+import Gallerie from "./pages/gallerie/Gallerie";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -44,6 +45,7 @@ const AppContent = () => {
         <Route path="/skills" element={<Skills />} />
         <Route path="/education" element={<Education />} />
         <Route path="/experience" element={<Experience />} />
+        <Route path="/gallerie" element={<Gallerie />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
