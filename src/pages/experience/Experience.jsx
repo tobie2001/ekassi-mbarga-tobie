@@ -173,7 +173,7 @@ const Experience = () => {
             <Briefcase className="w-8 h-8 text-blue-600" />
           </div>
           <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mb-6">
-            Mon Parcours
+            Mes Projets
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Une expertise technique polyvalente forgée à travers des projets innovants 
