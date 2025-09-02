@@ -21,6 +21,11 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Fermer le menu mobile lors du changement de route
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -40,6 +45,11 @@ const Header = () => {
       document.body.style.overflow = '';
     };
   }, [isMobileMenuOpen]);
+
+  // Fonction unifiée pour gérer les clics sur les liens
+  const handleNavClick = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   const navVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -98,21 +108,22 @@ const Header = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 120, damping: 20 }}
-      className={`fixed w-full max-w-[100vw] overflow-x-hidden flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-16 py-4 z-50 transition-all duration-500 ${
+      className={`fixed w-full max-w-[100vw] overflow-x-hidden flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-16 py-4 z-[100] transition-all duration-500 ${
         scrolled 
-          ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl border-b border-gray-700/30 z-50' 
-          : 'bg-gray-900/90 backdrop-blur-sm z-50'
+          ? 'bg-gray-900/95 backdrop-blur-md shadow-2xl border-b border-gray-700/30' 
+          : 'bg-gray-900/90 backdrop-blur-sm'
       }`}
     >
       {/* Logo avec effet de gradient */}
       <motion.div 
         whileHover={{ scale: 1.05, rotateX: 5 }}
         whileTap={{ scale: 0.95 }}
-        className='relative'
+        className='relative z-[110]'
       >
         <NavLink 
           to="/"
-          className='text-2xl sm:text-3xl font-black bg-gradient-to-r from-red-500 via-pink-500 to-red-600 bg-clip-text text-transparent hover:from-red-400 hover:via-pink-400 hover:to-red-500 transition-all duration-300 z-50'
+          onClick={handleNavClick}
+          className='text-2xl sm:text-3xl font-black bg-gradient-to-r from-red-500 via-pink-500 to-red-600 bg-clip-text text-transparent hover:from-red-400 hover:via-pink-400 hover:to-red-500 transition-all duration-300'
           style={{ 
             textShadow: '0 0 30px rgba(239, 68, 68, 0.3)',
             filter: 'drop-shadow(0 0 10px rgba(239, 68, 68, 0.2))'
@@ -132,30 +143,31 @@ const Header = () => {
         variants={navVariants}
         initial="hidden"
         animate="visible"
-        className='hidden md:flex bg-gray-800/30 backdrop-blur-sm rounded-full px-6 py-2 border border-gray-700/50 z-50'
+        className='hidden md:flex bg-gray-800/30 backdrop-blur-sm rounded-full px-6 py-2 border border-gray-700/50 z-[105]'
       >
         {navList.map((item) => (
           <motion.div 
-            key={item.id}
+            key={`desktop-${item.id}`}
             variants={navItemVariants}
             className='relative mx-2 lg:mx-4'
             whileHover={{ y: -2 }}
           >
             <NavLink 
               to={item.path}
+              onClick={handleNavClick}
               className={({ isActive }) => 
-                `relative text-sm lg:text-base font-semibold px-4 py-2 rounded-full transition-all duration-300 ${
+                `relative text-sm lg:text-base font-semibold px-4 py-2 rounded-full transition-all duration-300 z-[106] ${
                   isActive 
-                    ? 'text-white bg-gradient-to-r from-red-500 to-pink-600 shadow-lg shadow-red-500/25 z-50' 
-                    : 'text-gray-300 hover:text-white hover:bg-gray-700/50 z-50'
+                    ? 'text-white bg-gradient-to-r from-red-500 to-pink-600 shadow-lg shadow-red-500/25' 
+                    : 'text-gray-300 hover:text-white hover:bg-gray-700/50'
                 }`
               }
             >
-              <span className="relative z-10">{item.data}</span>
+              <span className="relative z-[107]">{item.data}</span>
               {location.pathname === item.path && (
                 <motion.div 
-                  layoutId="activeDesktopNav"
-                  className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-600 rounded-full"
+                  layoutId="activeDesktopIndicator"
+                  className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-600 rounded-full z-[106]"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
@@ -166,7 +178,7 @@ const Header = () => {
       
       {/* Mobile menu button avec design amélioré */}
       <motion.button 
-        className='md:hidden relative p-3 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white focus:outline-none'
+        className='md:hidden relative p-3 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-white focus:outline-none z-[110]'
         onClick={toggleMobileMenu}
         aria-label="Toggle menu"
         whileHover={{ 
@@ -191,7 +203,7 @@ const Header = () => {
       </motion.button>
       
       {/* Mobile Navigation Menu avec design moderne */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isMobileMenuOpen && (
           <>
             {/* Overlay */}
@@ -199,8 +211,8 @@ const Header = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className='md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40'
-              onClick={() => setIsMobileMenuOpen(false)}
+              className='md:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[90]'
+              onClick={toggleMobileMenu}
             />
             
             {/* Menu coulissant */}
@@ -209,7 +221,7 @@ const Header = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className='md:hidden fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-gray-900/95 z-50 shadow-2xl border-l border-gray-700/50'
+              className='md:hidden fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-gray-900/95 backdrop-blur-md z-[95] shadow-2xl border-l border-gray-700/50'
             >
               {/* Header du menu mobile */}
               <div className='flex justify-between items-center p-6 border-b border-gray-700/50'>
@@ -221,7 +233,7 @@ const Header = () => {
                   Menu
                 </motion.h2>
                 <motion.button
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={toggleMobileMenu}
                   className='p-2 rounded-full bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 transition-all duration-200'
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
@@ -234,7 +246,7 @@ const Header = () => {
               <nav className='flex flex-col p-6 space-y-2'>
                 {navList.map((item, index) => (
                   <motion.div
-                    key={`mobile-nav-${item.id}`}
+                    key={`mobile-${item.id}`}
                     variants={mobileItemVariants}
                     custom={index}
                     whileHover={{ x: 10 }}
@@ -242,34 +254,48 @@ const Header = () => {
                   >
                     <NavLink 
                       to={item.path}
-                      onClick={e => {
-                        setIsMobileMenuOpen(false);
-                        // Stop propagation pour éviter tout bug
-                        e.stopPropagation();
-                      }}
+                      onClick={handleNavClick}
                       className={({ isActive }) => 
-                        `group flex items-center text-lg font-medium py-4 px-6 rounded-xl transition-all duration-300 ${
+                        `group relative flex items-center text-lg font-medium py-4 px-6 rounded-xl transition-all duration-300 z-[96] ${
                           isActive 
-                            ? 'bg-gray-800/90 text-white shadow-lg' 
+                            ? 'bg-gradient-to-r from-red-500/20 to-pink-500/20 text-white shadow-lg border border-red-500/30' 
                             : 'text-gray-300 hover:text-white hover:bg-gray-800/70 hover:shadow-md'
                         }`
                       }
                     >
-                      <span className="relative z-10">{item.data}</span>
-                      {/* Indicateur pour l'item actif */}
+                      <span className="relative z-[97]">{item.data}</span>
+                      
+                      {/* Indicateur pour l'item actif sur mobile */}
                       {location.pathname === item.path && (
                         <motion.div 
-                          layoutId="activeMobileNav"
-                          className="absolute inset-0 bg-gray-800/90 rounded-xl"
+                          layoutId="activeMobileIndicator"
+                          className="absolute right-4 w-2 h-2 bg-gradient-to-r from-red-500 to-pink-500 rounded-full z-[97]"
                           transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         />
                       )}
+                      
+                      {/* Effet de survol */}
+                      <motion.div 
+                        className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 rounded-xl opacity-0 group-hover:opacity-100"
+                        transition={{ duration: 0.2 }}
+                      />
                     </NavLink>
                   </motion.div>
                 ))}
               </nav>
               
-              {/* Footer décoratif supprimé pour éviter tout overlay gênant */}
+              {/* Décoration du bas */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className='absolute bottom-6 left-6 right-6 text-center'
+              >
+                <div className='h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent mb-4'></div>
+                <p className='text-xs text-gray-500'>
+                  Portfolio • 2024
+                </p>
+              </motion.div>
             </motion.div>
           </>
         )}

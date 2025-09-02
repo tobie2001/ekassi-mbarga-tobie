@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HeroImage from "../assets/tobie.png";
-import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaCode, FaPalette, FaRocket, FaArrowRight, FaPlay } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaCode, FaPalette, FaRocket, FaArrowRight, FaPlay, FaSmile, FaComments } from "react-icons/fa";
 import { HiOutlineMail, HiSparkles } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
@@ -50,10 +50,10 @@ const Home = () => {
   ];
 
   const stats = [
-    { value: "30+", label: "Projets Complétés", icon: "🚀" },
-    { value: "3+", label: "Années d'Expérience", icon: "⭐" },
-    { value: "30+", label: "Clients Satisfaits", icon: "😊" },
-    { value: "24/7", label: "Support Disponible", icon: "💬" }
+    { value: "30+", label: "Projets Complétés", icon: <FaRocket /> },
+    { value: "3+", label: "Années d'Expérience", icon: <HiSparkles /> },
+    { value: "30+", label: "Clients Satisfaits", icon: <FaSmile /> },
+    { value: "24/7", label: "Support Disponible", icon: <FaComments /> }
   ];
 
   const handleDownloadCV = () => {
