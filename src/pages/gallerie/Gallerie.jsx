@@ -37,7 +37,7 @@ const Gallerie = () => {
       {/* Header */}
       <div className="bg-gray-900 border-b border-gray-800">
         <div className="max-w-full px-8 py-16 text-center">
-          <h1 className="text-5xl font-light text-white mb-4">Portfolio</h1>
+          <h1 className="text-5xl font-light text-white mb-4">MBARGA EKASSI Tobie</h1>
           <div className="w-32 h-px bg-white mx-auto opacity-50"></div>
         </div>
       </div>
