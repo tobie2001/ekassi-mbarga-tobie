@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Briefcase, ExternalLink, X, MapPin, Clock, Code, Rocket, Eye, Sparkles } from 'lucide-react';
 
 const Experience = () => {
@@ -158,7 +159,22 @@ const Experience = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <>
+      <Helmet>
+        <title>Expériences & Projets | Ekassi Mbarga Tobie</title>
+        <meta name="description" content="Découvrez les expériences professionnelles et projets réalisés par Ekassi Mbarga Tobie : développement web, mobile, e-commerce, applications, consulting, UI/UX, et plus encore." />
+        <meta name="keywords" content="expérience, projets, portfolio, développement web, développement mobile, React, Node.js, freelance, Ekassi Mbarga Tobie, consulting, UI/UX, applications, e-commerce, Next.js, Tailwind CSS" />
+        <meta property="og:title" content="Expériences & Projets | Ekassi Mbarga Tobie" />
+        <meta property="og:description" content="Parcours professionnel, réalisations et projets innovants d'Ekassi Mbarga Tobie dans le développement web, mobile et consulting." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ekassi-mbarga-tobie.vercel.app/experience" />
+        <meta property="og:image" content="https://ekassi-mbarga-tobie.vercel.app/images/experience-cover.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Expériences & Projets | Ekassi Mbarga Tobie" />
+        <meta name="twitter:description" content="Découvrez les projets et expériences d'Ekassi Mbarga Tobie : web, mobile, consulting, UI/UX, e-commerce, applications." />
+        <meta name="twitter:image" content="https://ekassi-mbarga-tobie.vercel.app/images/experience-cover.jpg" />
+      </Helmet>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -400,6 +416,7 @@ const Experience = () => {
         }
       `}</style>
     </div>
+    </>
   );
 };
 
