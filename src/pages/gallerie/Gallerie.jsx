@@ -23,7 +23,7 @@ const Gallerie = () => {
     { src: '/src/assets/gallerie/img1.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 1' },
     { src: '/src/assets/gallerie/img2.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 2' },
     { src: '/src/assets/gallerie/img3.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 3' },
-    { src: '/src/assets/gallerie/img3.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 3b' },
+    { src: '/src/assets/gallerie/img3.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 3a' },
     { src: '/src/assets/gallerie/img4.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 4' },
     { src: '/src/assets/gallerie/img5.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 5' },
     { src: '/src/assets/gallerie/img6.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 6' },
