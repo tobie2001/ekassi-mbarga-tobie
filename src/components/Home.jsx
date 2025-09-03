@@ -77,7 +77,7 @@ const Home = () => {
           ></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Image - First on mobile, second on desktop */}
             <div className="order-1 lg:order-2 lg:col-span-5">
