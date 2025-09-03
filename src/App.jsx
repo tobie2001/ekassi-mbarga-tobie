@@ -6,6 +6,7 @@ import Service from "./pages/service/Service";
 import Skills from "./pages/skills/Skills";
 import Education from "./pages/education/Education";
 import Experience from "./pages/experience/Experience";
+import ExperienceDetail from "./pages/experience/ExperienceDetail";
 import Contact from "./pages/contact/Contact";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
@@ -45,6 +46,7 @@ const AppContent = () => {
         <Route path="/skills" element={<Skills />} />
         <Route path="/education" element={<Education />} />
         <Route path="/experience" element={<Experience />} />
+        <Route path="/experience/:company" element={<ExperienceDetail />} />
         <Route path="/gallerie" element={<Gallerie />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Briefcase, ExternalLink, X, MapPin, Clock, Code, Rocket, Eye, Sparkles } from 'lucide-react';
+import { Briefcase, ExternalLink, MapPin, Clock, Rocket } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Experience = () => {
-  const [selectedExperience, setSelectedExperience] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const navigate = useNavigate();
 
   const professionalExperiences = [
     {
@@ -148,14 +148,11 @@ const Experience = () => {
     },
   ];
 
-  const openModal = (experience) => {
-    setSelectedExperience(experience);
-    setIsModalOpen(true);
-  };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedExperience(null);
+  const handleCardClick = (exp) => {
+    navigate(`/experience/${encodeURIComponent(exp.company)}`, {
+      state: { experience: exp },
+    });
   };
 
   return (
@@ -199,19 +196,21 @@ const Experience = () => {
 
         {/* Experience Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-20">
-            {professionalExperiences.map((exp, index) => (
+          {professionalExperiences.map((exp, index) => (
             <div
-                key={index}
-                className={`group relative bg-white rounded-2xl shadow-lg transition-all duration-500 overflow-hidden w-full max-w-full mx-auto
-                  ${hoveredCard === index ? 'scale-105' : ''}
-                  ${typeof window !== 'undefined' && window.innerWidth < 640 ? '' : 'hover:shadow-2xl hover:-translate-y-2'}`}
-                style={{ maxWidth: '100%' }}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
+              key={index}
+              className={`group relative bg-white rounded-2xl shadow-lg transition-all duration-500 overflow-hidden w-full max-w-full mx-auto
+                ${hoveredCard === index ? 'scale-105' : ''}
+                ${typeof window !== 'undefined' && window.innerWidth < 640 ? '' : 'hover:shadow-2xl hover:-translate-y-2'}`}
+              style={{ maxWidth: '100%' }}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
+              onClick={() => handleCardClick(exp)}
+              role="button"
+              tabIndex={0}
             >
               {/* Gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-              
               {/* Status badge */}
               <div className="absolute top-4 right-4 z-20">
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -223,7 +222,6 @@ const Experience = () => {
                   {exp.status}
                 </span>
               </div>
-
               <div className="relative z-10 p-3 sm:p-6">
                 {/* Company Image with overlay effect */}
                 <div className="relative overflow-hidden rounded-xl mb-4 sm:mb-6 group">
@@ -235,7 +233,6 @@ const Experience = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-20 mix-blend-overlay`}></div>
                 </div>
-
                 {/* Content */}
                 <div className="space-y-4">
                   <div>
@@ -246,7 +243,6 @@ const Experience = () => {
                       {exp.company}
                     </h4>
                   </div>
-
                   {/* Meta information */}
                   <div className="flex flex-wrap gap-4 text-sm text-gray-600">
                     <div className="flex items-center">
@@ -257,45 +253,34 @@ const Experience = () => {
                       <MapPin className="w-4 h-4 mr-2 text-red-500" />
                       {exp.location}
                     </div>
-                      </div>
-
+                  </div>
                   {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {exp.tags.slice(0, 3).map((tag, i) => (
                       <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                            {tag}
-                          </span>
-                        ))}
+                        {tag}
+                      </span>
+                    ))}
                     {exp.tags.length > 3 && (
                       <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                         +{exp.tags.length - 3}
                       </span>
                     )}
-                      </div>
-
-                  {/* Action buttons */}
-                  <div className="flex gap-3 pt-4">
-                        <button
-                          onClick={() => openModal(exp)}
-                      className={`flex-1 py-3 px-4 bg-gradient-to-r ${exp.gradient} text-white rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center`}
-                        >
-                      <Eye className="w-4 h-4 mr-2" />
-                      Détails
-                        </button>
-                    {exp.projectUrl && exp.projectUrl !== "#" && (
-                          <a
-                            href={exp.projectUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        className="py-3 px-4 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center"
-                          >
-                        <ExternalLink className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
-                    </div>
                   </div>
+                  {/* Project link */}
+                  {exp.projectUrl && exp.projectUrl !== "#" && (
+                    <a
+                      href={exp.projectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="py-3 px-4 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center mt-2"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
                 </div>
+              </div>
+            </div>
           ))}
         </div>
 
@@ -309,88 +294,7 @@ const Experience = () => {
           </div>
         </div>
 
-        {/* Enhanced Modal */}
-        {isModalOpen && selectedExperience && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 z-[999] animate-fadeIn mt-48">
-            <div className="bg-white rounded-2xl w-full max-w-lg sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[95vh] overflow-hidden shadow-2xl animate-slideUp mx-2">
-              {/* Modal Header */}
-              <div className={`relative p-4 sm:p-6 bg-gradient-to-r ${selectedExperience.gradient} text-white`}>
-                <button 
-                  onClick={closeModal}
-                  className="absolute top-2 right-2 sm:top-4 sm:right-4 text-white/80 hover:text-white hover:bg-white/20 p-2 rounded-full transition-all z-[1000] bg-black/30 backdrop-blur"
-                  style={{ pointerEvents: 'auto' }}
-                >
-                  <X className="w-5 h-5" />
-                </button>
-                <div className="pr-8 sm:pr-12">
-                  <h3 className="text-2xl font-bold mb-2">{selectedExperience.role}</h3>
-                  <h4 className="text-xl font-semibold opacity-90 mb-2">{selectedExperience.company}</h4>
-                  <div className="flex items-center gap-4 text-sm opacity-80">
-                    <span className="flex items-center">
-                      <Clock className="w-4 h-4 mr-1" />
-                      {selectedExperience.period}
-                    </span>
-                    <span className="flex items-center">
-                      <MapPin className="w-4 h-4 mr-1" />
-                      {selectedExperience.location}
-                    </span>
-                  </div>
-                </div>
-                </div>
 
-              {/* Modal Content */}
-              <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(95vh-120px)]">
-                <img 
-                  src={selectedExperience.image} 
-                  alt={selectedExperience.company} 
-                  className="w-full h-40 sm:h-64 object-cover rounded-xl mb-4 sm:mb-6 shadow-lg"
-                />
-
-                <div className="space-y-6">
-                  <div>
-                    <h5 className="text-lg font-semibold text-gray-900 mb-3">Missions principales</h5>
-                    <ul className="list-none space-y-3">
-                  {selectedExperience.description.map((item, i) => (
-                        <li key={i} className="flex items-start">
-                          <div className={`w-2 h-2 bg-gradient-to-r ${selectedExperience.gradient} rounded-full mt-2 mr-3 flex-shrink-0`}></div>
-                          <span className="text-gray-700 leading-relaxed">{item}</span>
-                        </li>
-                  ))}
-                </ul>
-                  </div>
-
-                  <div>
-                    <h5 className="text-lg font-semibold text-gray-900 mb-3">Technologies utilisées</h5>
-                    <div className="flex flex-wrap gap-2">
-                  {selectedExperience.tags.map((tag, i) => (
-                        <span 
-                          key={i} 
-                          className={`px-4 py-2 bg-gradient-to-r ${selectedExperience.gradient} text-white rounded-full text-sm font-medium shadow-md`}
-                        >
-                      {tag}
-                    </span>
-                  ))}
-                    </div>
-                </div>
-
-                  {selectedExperience.projectUrl && selectedExperience.projectUrl !== "#" && (
-                    <div className="pt-4 border-t border-gray-200">
-                  <a
-                    href={selectedExperience.projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                        className={`inline-flex items-center px-6 py-3 bg-gradient-to-r ${selectedExperience.gradient} text-white rounded-xl font-semibold hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300`}
-                  >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                    Voir le projet en ligne
-                  </a>
-                    </div>
-                )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       <style jsx>{`
