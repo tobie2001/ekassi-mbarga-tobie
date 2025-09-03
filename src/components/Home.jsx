@@ -54,11 +54,7 @@ const Home = () => {
     { value: "24/7", label: "Support Disponible", icon: <FaComments /> }
   ];
 
-  const handleDownloadCV = () => {
-    // Logique pour télécharger le CV
-    console.log("Téléchargement du CV...");
-    // Vous pouvez ajouter ici la logique pour télécharger votre fichier CV
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
@@ -198,13 +194,14 @@ const Home = () => {
                       </button>
                     </Link>
                     
-                    <button
-                      onClick={handleDownloadCV}
+                    <a
+                      href="/documents/cv.pdf"
+                      download
                       className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 border-2 border-green-200 hover:border-green-400 text-green-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <FaFileDownload className="group-hover:animate-bounce" />
                       Télécharger CV
-                    </button>
+                    </a>
                   </div>
                 </div>
 
