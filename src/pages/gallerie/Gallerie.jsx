@@ -18,19 +18,19 @@ const Gallerie = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Images locales originales
+  // Images déplacées dans le dossier public/gallerie pour compatibilité Vercel
   const photos = [
-    { src: '/src/assets/gallerie/img1.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 1' },
-    { src: '/src/assets/gallerie/img2.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 2' },
-    { src: '/src/assets/gallerie/img3.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 3' },
-    { src: '/src/assets/gallerie/img3.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 3a' },
-    { src: '/src/assets/gallerie/img4.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 4' },
-    { src: '/src/assets/gallerie/img5.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 5' },
-    { src: '/src/assets/gallerie/img6.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 6' },
-    { src: '/src/assets/gallerie/img7.JPG', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 7' },
-    { src: '/src/assets/gallerie/img8.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 8' },
-    { src: '/src/assets/gallerie/img9.JPG', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 9' },
-    { src: '/src/assets/gallerie/img10.JPG', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 10' },
+    { src: '/gallerie/img1.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 1' },
+    { src: '/gallerie/img2.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 2' },
+    { src: '/gallerie/img3.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 3' },
+    { src: '/gallerie/img3.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 3a' },
+    { src: '/gallerie/img4.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 4' },
+    { src: '/gallerie/img5.jpg', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 5' },
+    { src: '/gallerie/img6.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 6' },
+    { src: '/gallerie/img7.JPG', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 7' },
+    { src: '/gallerie/img8.png', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 8' },
+    { src: '/gallerie/img9.JPG', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 9' },
+    { src: '/gallerie/img10.JPG', auteur: 'Mbarga Ekassi Tobie', titre: 'Photo 10' },
   ];
 
   const openModal = (photo, index) => {
