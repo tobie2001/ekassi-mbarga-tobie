@@ -27,6 +27,23 @@ const Experience = () => {
     },
     {
       role: "Développeur Full Stack",
+      company: "BISAF CAMEROUN",
+      period: "2024 - Présent",
+      description: [
+        "Développement d'une application d'aide à la santé pour l'ONG BISAF Cameroun.",
+        "Mise en place d'une plateforme web moderne pour la gestion et le suivi des bénéficiaires.",
+        "Intégration d'outils de communication et de reporting pour les équipes terrain.",
+        "Optimisation de l'expérience utilisateur avec Tailwind CSS."
+      ],
+      tags: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+      image: "/images/bisaf.jpg",
+      projectUrl: "https://www.bisafcameroun.org/",
+      location: "Cameroun",
+      status: "En cours",
+      gradient: "from-teal-500 to-green-600"
+    },
+    {
+      role: "Développeur Full Stack",
       company: "topShop",
       period: "2025",
       description: [
@@ -110,7 +127,7 @@ const Experience = () => {
       location: "France",
       status: "En cours",
       gradient: "from-indigo-500 to-blue-600"
-  },
+    },
     {
       role: "Stagiaire Développeur",
       company: "CNADI Yaounde",
@@ -144,7 +161,7 @@ const Experience = () => {
       projectUrl: "https://cv-website-tau.vercel.app/",
       location: "Remote",
       status: "Terminé",
-  gradient: "from-cyan-500 to-blue-600",
+      gradient: "from-cyan-500 to-blue-600",
     },
   ];
 
@@ -172,132 +189,131 @@ const Experience = () => {
         <meta name="twitter:image" content="https://ekassi-mbarga-tobie.vercel.app/images/experience-cover.jpg" />
       </Helmet>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-pink-400 to-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-500"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header Section */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center justify-center p-3 bg-white rounded-full shadow-lg mb-6">
-            <Briefcase className="w-8 h-8 text-blue-600" />
-          </div>
-          <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mb-6">
-            Mes Projets
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Une expertise technique polyvalente forgée à travers des projets innovants 
-            et des défis technologiques stimulants
-          </p>
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-pink-400 to-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-500"></div>
         </div>
 
-        {/* Experience Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-20">
-          {professionalExperiences.map((exp, index) => (
-            <div
-              key={index}
-              className={`group relative bg-white rounded-2xl shadow-lg transition-all duration-500 overflow-hidden w-full max-w-full mx-auto
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Header Section */}
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center justify-center p-3 bg-white rounded-full shadow-lg mb-6">
+              <Briefcase className="w-8 h-8 text-blue-600" />
+            </div>
+            <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mb-6">
+              Mes Projets
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Une expertise technique polyvalente forgée à travers des projets innovants
+              et des défis technologiques stimulants
+            </p>
+          </div>
+
+          {/* Experience Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-20">
+            {professionalExperiences.map((exp, index) => (
+              <div
+                key={index}
+                className={`group relative bg-white rounded-2xl shadow-lg transition-all duration-500 overflow-hidden w-full max-w-full mx-auto
                 ${hoveredCard === index ? 'scale-105' : ''}
                 ${typeof window !== 'undefined' && window.innerWidth < 640 ? '' : 'hover:shadow-2xl hover:-translate-y-2'}`}
-              style={{ maxWidth: '100%' }}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
-              onClick={() => handleCardClick(exp)}
-              role="button"
-              tabIndex={0}
-            >
-              {/* Gradient overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-              {/* Status badge */}
-              <div className="absolute top-4 right-4 z-20">
-                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                  exp.status === 'En cours' 
-                    ? 'bg-green-100 text-green-700 border-2 border-green-200' 
+                style={{ maxWidth: '100%' }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                onClick={() => handleCardClick(exp)}
+                role="button"
+                tabIndex={0}
+              >
+                {/* Gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                {/* Status badge */}
+                <div className="absolute top-4 right-4 z-20">
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${exp.status === 'En cours'
+                    ? 'bg-green-100 text-green-700 border-2 border-green-200'
                     : 'bg-gray-100 text-gray-700 border-2 border-gray-200'
-                }`}>
-                  {exp.status === 'En cours' && <div className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></div>}
-                  {exp.status}
-                </span>
-              </div>
-              <div className="relative z-10 p-3 sm:p-6">
-                {/* Company Image with overlay effect */}
-                <div className="relative overflow-hidden rounded-xl mb-4 sm:mb-6 group">
-                  <img 
-                    src={exp.image} 
-                    alt={exp.company} 
-                    className="w-full h-32 sm:h-48 object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-20 mix-blend-overlay`}></div>
+                    }`}>
+                    {exp.status === 'En cours' && <div className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></div>}
+                    {exp.status}
+                  </span>
                 </div>
-                {/* Content */}
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                      {exp.role}
-                    </h3>
-                    <h4 className={`text-lg font-semibold bg-gradient-to-r ${exp.gradient} bg-clip-text text-transparent`}>
-                      {exp.company}
-                    </h4>
+                <div className="relative z-10 p-3 sm:p-6">
+                  {/* Company Image with overlay effect */}
+                  <div className="relative overflow-hidden rounded-xl mb-4 sm:mb-6 group">
+                    <img
+                      src={exp.image}
+                      alt={exp.company}
+                      className="w-full h-32 sm:h-48 object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-20 mix-blend-overlay`}></div>
                   </div>
-                  {/* Meta information */}
-                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                    <div className="flex items-center">
-                      <Clock className="w-4 h-4 mr-2 text-blue-500" />
-                      {exp.period}
+                  {/* Content */}
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                        {exp.role}
+                      </h3>
+                      <h4 className={`text-lg font-semibold bg-gradient-to-r ${exp.gradient} bg-clip-text text-transparent`}>
+                        {exp.company}
+                      </h4>
                     </div>
-                    <div className="flex items-center">
-                      <MapPin className="w-4 h-4 mr-2 text-red-500" />
-                      {exp.location}
+                    {/* Meta information */}
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                      <div className="flex items-center">
+                        <Clock className="w-4 h-4 mr-2 text-blue-500" />
+                        {exp.period}
+                      </div>
+                      <div className="flex items-center">
+                        <MapPin className="w-4 h-4 mr-2 text-red-500" />
+                        {exp.location}
+                      </div>
                     </div>
-                  </div>
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {exp.tags.slice(0, 3).map((tag, i) => (
-                      <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
-                        {tag}
-                      </span>
-                    ))}
-                    {exp.tags.length > 3 && (
-                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-                        +{exp.tags.length - 3}
-                      </span>
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {exp.tags.slice(0, 3).map((tag, i) => (
+                        <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                          {tag}
+                        </span>
+                      ))}
+                      {exp.tags.length > 3 && (
+                        <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                          +{exp.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
+                    {/* Project link */}
+                    {exp.projectUrl && exp.projectUrl !== "#" && (
+                      <a
+                        href={exp.projectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="py-3 px-4 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center mt-2"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
                     )}
                   </div>
-                  {/* Project link */}
-                  {exp.projectUrl && exp.projectUrl !== "#" && (
-                    <a
-                      href={exp.projectUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="py-3 px-4 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center mt-2"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Call to action */}
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center p-4 bg-white rounded-2xl shadow-lg">
-            <Rocket className="w-6 h-6 text-blue-600 mr-3" />
-            <span className="text-lg font-semibold text-gray-800">
-              Prêt pour de nouveaux défis technologiques
-            </span>
+            ))}
           </div>
+
+          {/* Call to action */}
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center p-4 bg-white rounded-2xl shadow-lg">
+              <Rocket className="w-6 h-6 text-blue-600 mr-3" />
+              <span className="text-lg font-semibold text-gray-800">
+                Prêt pour de nouveaux défis technologiques
+              </span>
+            </div>
+          </div>
+
+
         </div>
 
-
-      </div>
-
-      <style jsx>{`
+        <style jsx>{`
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
@@ -319,7 +335,7 @@ const Experience = () => {
           animation: slideUp 0.4s ease-out;
         }
       `}</style>
-    </div>
+      </div>
     </>
   );
 };
