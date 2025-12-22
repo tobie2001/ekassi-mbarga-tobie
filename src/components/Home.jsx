@@ -214,7 +214,10 @@ const Home = () => {
                 <div className={`transform transition-all duration-700 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
                   <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8">
                     {features.map((feature, i) => (
-                      <div key={i} className="flex items-center gap-2 text-gray-300 justify-center lg:justify-start">
+                      <div
+                        key={i}
+                        className="flex items-center gap-2 text-gray-300 justify-start text-left"
+                      >
                         <FaCheckCircle className="text-green-400 flex-shrink-0 text-sm sm:text-base" />
                         <span className="text-xs sm:text-sm lg:text-base">{feature}</span>
                       </div>
