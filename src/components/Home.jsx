@@ -116,11 +116,11 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
         <div className="relative max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center lg:items-start">
 
             {/* Image - First on mobile, Second on desktop */}
             <div className="lg:col-span-5 lg:order-2 z-10 relative">
-              <div className="relative max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mt-20 z-0 md:z-0">
+              <div className="relative max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mt-20 lg:mt-8 z-0 md:z-0">
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-[2rem] sm:rounded-[3rem] blur-2xl sm:blur-3xl animate-pulse"></div>
 
