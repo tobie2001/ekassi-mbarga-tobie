@@ -213,11 +213,7 @@ const Service = () => {
                       ))}
                     </div>
 
-                    {/* CTA Button */}
-                    <button className={`w-full bg-gradient-to-r ${service.gradient} text-white font-semibold py-3 px-6 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center group/btn`}>
-                      <span className="mr-2">Découvrir</span>
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
+                    
                   </div>
 
                   {/* Floating Particles Effect */}

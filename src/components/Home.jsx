@@ -1,22 +1,33 @@
 import React, { useState, useEffect } from "react";
 import HeroImage from "../assets/tobie.png";
-import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaCode, FaPalette, FaRocket, FaArrowRight, FaPlay, FaSmile, FaComments } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaCode, FaPalette, FaRocket, FaArrowRight, FaPlay, FaSmile, FaComments, FaCheckCircle, FaReact, FaNodeJs, FaPython, FaDatabase, FaLeaf, FaJsSquare, FaBootstrap, FaMobileAlt } from "react-icons/fa";
+import { SiMysql, SiTypescript, SiExpress, SiTailwindcss, SiN8N, SiDjango, SiRedis, SiPostgresql, SiFirebase } from "react-icons/si";
 import { HiOutlineMail, HiSparkles } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [activeSkill, setActiveSkill] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+
+    // Auto-rotate skills
+    const interval = setInterval(() => {
+      setActiveSkill(prev => (prev + 1) % 3);
+    }, 3000);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearInterval(interval);
+    };
   }, []);
 
   const socialLinks = [
@@ -29,205 +40,235 @@ const Home = () => {
   ];
 
   const skills = [
-    { icon: <FaCode />, text: "Full-Stack Development", color: "#3B82F6", description: "Applications web complètes" },
-    { icon: <FaPalette />, text: "UI/UX Design", color: "#8B5CF6", description: "Expériences utilisateur" },
-    { icon: <FaRocket />, text: "Innovation & Strategy", color: "#10B981", description: "Solutions créatives" }
+    { icon: <FaCode />, text: "Full-Stack Development", color: "#3B82F6", description: "Applications web complètes", gradient: "from-blue-500 to-cyan-500" },
+    { icon: <FaPalette />, text: "UI/UX Design", color: "#8B5CF6", description: "Expériences utilisateur", gradient: "from-purple-500 to-pink-500" },
+    { icon: <FaRocket />, text: "Innovation & Strategy", color: "#10B981", description: "Solutions créatives", gradient: "from-green-500 to-emerald-500" }
   ];
 
   const technologies = [
-    { name: 'React', category: 'Frontend', level: 95 },
-    { name: 'Node.js', category: 'Backend', level: 90 },
-    { name: 'Python', category: 'Backend', level: 85 },
-    { name: 'MySQL', category: 'Database', level: 82 },
-    { name: 'MongoDB', category: 'Database', level: 80 },
-    { name: 'JavaScript', category: 'Frontend', level: 98 },
-    { name: 'TypeScript', category: 'Frontend', level: 85 },
-    { name: 'Express', category: 'Framework', level: 90 },
-    { name: 'Tailwind', category: 'Styling', level: 95 },
-    { name: 'Bootstrap', category: 'Styling', level: 90 }
+    { name: 'React', category: 'Frontend', level: 95, icon: <FaReact className="text-cyan-400" /> },
+    { name: 'Node.js', category: 'Backend', level: 90, icon: <FaNodeJs className="text-green-500" /> },
+    { name: 'Python', category: 'Backend', level: 85, icon: <FaPython className="text-yellow-400" /> },
+    { name: 'MySQL', category: 'Database', level: 82, icon: <SiMysql className="text-blue-500" /> },
+    { name: 'MongoDB', category: 'Database', level: 80, icon: <FaLeaf className="text-green-700" /> },
+    { name: 'JavaScript', category: 'Frontend', level: 98, icon: <FaJsSquare className="text-yellow-300" /> },
+    { name: 'TypeScript', category: 'Frontend', level: 85, icon: <SiTypescript className="text-blue-400" /> },
+    { name: 'Express', category: 'Framework', level: 90, icon: <SiExpress className="text-gray-300" /> },
+    { name: 'Tailwind', category: 'Styling', level: 95, icon: <SiTailwindcss className="text-cyan-400" /> },
+    { name: 'n8n', category: 'Automation', level: 90, icon: <SiN8N className="text-orange-500" /> },
+    { name: 'React Native', category: 'Mobile', level: 85, icon: <FaMobileAlt className="text-blue-400" /> },
+    { name: 'Django', category: 'Backend', level: 80, icon: <SiDjango className="text-green-900" /> },
+    { name: 'Redis', category: 'Database', level: 75, icon: <SiRedis className="text-red-500" /> },
+    { name: 'PostgreSQL', category: 'Database', level: 80, icon: <SiPostgresql className="text-blue-700" /> },
+    { name: 'Firebase', category: 'Cloud', level: 75, icon: <SiFirebase className="text-yellow-500" /> }
   ];
 
   const stats = [
-    { value: "30+", label: "Projets Complétés", icon: <FaRocket /> },
-    { value: "3+", label: "Années d'Expérience", icon: <HiSparkles /> },
-    { value: "30+", label: "Clients Satisfaits", icon: <FaSmile /> },
-    { value: "24/7", label: "Support Disponible", icon: <FaComments /> }
+    { value: "30+", label: "Projets Complétés", icon: <FaRocket />, gradient: "from-blue-500 to-cyan-500" },
+    { value: "3+", label: "Années d'Expérience", icon: <HiSparkles />, gradient: "from-purple-500 to-pink-500" },
+    { value: "30+", label: "Clients Satisfaits", icon: <FaSmile />, gradient: "from-green-500 to-emerald-500" },
+    { value: "24/7", label: "Support Disponible", icon: <FaComments />, gradient: "from-orange-500 to-red-500" }
   ];
 
-
+  const features = [
+    "Design responsive & moderne",
+    "Performance optimisée",
+    "Code propre & maintenable",
+    "Support & maintenance"
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-12 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-blue-200/30 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-r from-purple-200/30 to-transparent rounded-full blur-3xl"></div>
-          <div 
-            className="absolute w-6 h-6 bg-blue-400/20 rounded-full blur-sm transition-all duration-300"
-            style={{
-              left: `${mousePosition.x * 0.02}px`,
-              top: `${mousePosition.y * 0.02}px`,
-            }}
-          ></div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Gradient Orbs */}
+        <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-l from-blue-500/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-r from-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-gradient-to-r from-pink-500/10 to-transparent rounded-full blur-3xl animate-pulse delay-500"></div>
+
+        {/* Floating Particles - Hidden on mobile for performance */}
+        <div className="hidden md:block">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white/30 rounded-full animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 4}s`
+              }}
+            ></div>
+          ))}
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-            {/* Image - First on mobile, second on desktop */}
-            <div className="order-1 lg:order-2 lg:col-span-5">
-              <div className="relative max-w-sm sm:max-w-md lg:max-w-lg mx-auto">
+        {/* Mouse Follower - Desktop only */}
+        <div
+          className="hidden lg:block absolute w-96 h-96 bg-blue-500/5 rounded-full blur-3xl transition-all duration-300 pointer-events-none"
+          style={{
+            left: `${mousePosition.x}px`,
+            top: `${mousePosition.y}px`,
+            transform: 'translate(-50%, -50%)'
+          }}
+        ></div>
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
+
+            {/* Image - First on mobile, Second on desktop */}
+            <div className="lg:col-span-5 lg:order-2 z-10">
+              <div className="relative max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mt-20">
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-[2rem] sm:rounded-[3rem] blur-2xl sm:blur-3xl animate-pulse"></div>
+
                 {/* Main Image Container */}
-                <div className="relative">
-                  <div className="aspect-square rounded-3xl sm:rounded-[3rem] overflow-hidden bg-gradient-to-br from-blue-100 to-purple-100 shadow-2xl border-4 sm:border-8 border-white/50 backdrop-blur-sm">
-                    <img
-                      src={HeroImage}
-                      alt="MBARGA EKASSI TOBIE"
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                      loading="eager"
-                    />
+                <div className="relative transform hover:scale-105 transition-transform duration-500">
+                  <div className="relative aspect-square rounded-[2rem] sm:rounded-[3rem] overflow-hidden border-2 sm:border-4 border-white/20 backdrop-blur-xl shadow-2xl">
+                    {/* Animated Border */}
+                    <div className="absolute inset-0 rounded-[2rem] sm:rounded-[3rem] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-50 animate-spin-slow"></div>
+                    <div className="absolute inset-0.5 sm:inset-1 rounded-[2rem] sm:rounded-[3rem] bg-gradient-to-br from-gray-900 to-gray-800 overflow-hidden">
+                      <img
+                        src={HeroImage}
+                        alt="MBARGA EKASSI TOBIE"
+                        className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
+                        loading="eager"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Floating Stats Cards */}
-                <div className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 bg-white/90 backdrop-blur-sm p-3 sm:p-4 rounded-2xl shadow-xl border border-white/20 animate-float">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">3+</div>
-                  <div className="text-xs sm:text-sm text-gray-600">Années d'expérience</div>
+                {/* Floating Cards - Adjusted for mobile */}
+                <div className="absolute -top-3 sm:-top-6 -left-3 sm:-left-6 bg-gradient-to-br from-blue-500/90 to-purple-500/90 backdrop-blur-xl p-2 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl border border-white/20 animate-float">
+                  <div className="text-xl sm:text-3xl font-bold text-white">3+</div>
+                  <div className="text-xs sm:text-sm text-white/80">Années</div>
                 </div>
 
-                <div className="absolute -bottom-2 sm:-bottom-4 -right-2 sm:-right-4 bg-white/90 backdrop-blur-sm p-3 sm:p-4 rounded-2xl shadow-xl border border-white/20 animate-float delay-500">
-                  <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">50+</div>
-                  <div className="text-xs sm:text-sm text-gray-600">Projets réalisés</div>
+                <div className="absolute -bottom-3 sm:-bottom-6 -right-3 sm:-right-6 bg-gradient-to-br from-green-500/90 to-emerald-500/90 backdrop-blur-xl p-2 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl border border-white/20 animate-float delay-500">
+                  <div className="text-xl sm:text-3xl font-bold text-white">50+</div>
+                  <div className="text-xs sm:text-sm text-white/80">Projets</div>
                 </div>
 
-                {/* Additional floating element */}
-                <div className="absolute top-1/2 -right-4 sm:-right-6 bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg animate-bounce">
-                  <HiSparkles className="text-white text-lg sm:text-xl" />
+                <div className="absolute top-1/2 -right-4 sm:-right-8 bg-gradient-to-r from-yellow-400 to-orange-500 p-2 sm:p-4 rounded-full shadow-2xl animate-bounce">
+                  <HiSparkles className="text-white text-lg sm:text-2xl" />
                 </div>
               </div>
             </div>
 
-            {/* Content - Second on mobile, first on desktop */}
-            <div className="order-2 lg:order-1 lg:col-span-7">
-              <div className="max-w-3xl">
+            {/* Content - Second on mobile, First on desktop */}
+            <div className="lg:col-span-7 lg:order-1 z-10">
+              <div className="max-w-3xl mx-auto lg:mx-0">
                 {/* Status Badge */}
-                <div className={`inline-flex items-center px-3 sm:px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                  <HiSparkles className="mr-1" />
-                  Disponible pour de nouveaux projets
+                <div className={`inline-flex items-center px-3 sm:px-4 py-2 bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-xl border border-green-500/30 text-green-300 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6 transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-ping"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 absolute"></div>
+                  <HiSparkles className="mr-1 sm:mr-2" />
+                  <span className="hidden xs:inline">Disponible pour de nouveaux projets</span>
+                  <span className="xs:hidden">Disponible</span>
                 </div>
 
-                {/* Main Heading */}
-                <div className={`transform transition-all duration-700 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight mb-4 sm:mb-6">
-                    <span className="bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent">
+                {/* Main Heading with Glitch Effect */}
+                <div className={`transform transition-all duration-700 delay-100 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-4 sm:mb-6 text-center lg:text-left">
+                    <span className="block text-white/90 mb-1 sm:mb-2">
                       MBARGA EKASSI
                     </span>
-                    <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 bg-clip-text text-transparent animate-pulse">
+                    <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient">
                       TOBIE
                     </span>
                   </h1>
                 </div>
 
-                {/* Subtitle */}
-                <div className={`transform transition-all duration-700 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-600 font-medium mb-4 sm:mb-6 leading-relaxed">
-                    <span className="text-blue-600 font-semibold">Développeur Web Full-Stack</span>
-                    <span className="text-gray-500"> & </span>
-                    <span className="text-purple-600 font-semibold">Designer</span>
-                  </h2>
+                {/* Animated Subtitle */}
+                <div className={`transform transition-all duration-700 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-4 sm:mb-6 h-16 sm:h-20 relative text-center lg:text-left">
+                    <div className="absolute inset-0 flex items-center justify-center lg:justify-start">
+                      <span className="text-blue-400 font-bold mr-2 sm:mr-3">Développeur</span>
+                      <div className="relative overflow-hidden h-10 sm:h-12">
+                        {['Full-Stack', 'React', 'Node.js'].map((text, i) => (
+                          <span
+                            key={i}
+                            className={`absolute left-0 top-0 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-bold transition-all duration-500 ${activeSkill === i ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+                              }`}
+                          >
+                            {text}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Description */}
-                <div className={`transform transition-all duration-700 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                  <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed mb-6 sm:mb-8 max-w-2xl">
-                    Expert en développement web et design numérique, je crée des 
-                    <span className="text-blue-600 font-semibold"> solutions digitales innovantes</span> qui allient 
-                    technique rigoureuse et esthétique moderne pour des expériences utilisateur exceptionnelles.
+                <div className={`transform transition-all duration-700 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <p className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed mb-6 sm:mb-8 text-center lg:text-left">
+                    Je transforme vos idées en
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-semibold"> expériences digitales exceptionnelles</span>,
+                    en combinant design moderne et performance technique.
                   </p>
                 </div>
 
-                {/* Skills */}
-                <div className={`transform transition-all duration-700 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    {skills.map((skill, index) => (
-                      <div
-                        key={index}
-                        className="group bg-white/80 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/50 hover:border-blue-300/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className="p-2 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 group-hover:from-blue-100 group-hover:to-purple-100 transition-colors">
-                            <span style={{ color: skill.color }} className="text-lg">{skill.icon}</span>
-                          </div>
-                          <div>
-                            <div className="font-medium text-gray-800 text-sm sm:text-base">{skill.text}</div>
-                            <div className="text-xs sm:text-sm text-gray-500 mt-1">{skill.description}</div>
-                          </div>
-                        </div>
+                {/* Features List - Grid on mobile, 2 columns */}
+                <div className={`transform transition-all duration-700 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3 mb-6 sm:mb-8">
+                    {features.map((feature, i) => (
+                      <div key={i} className="flex items-center gap-2 text-gray-300 justify-center lg:justify-start">
+                        <FaCheckCircle className="text-green-400 flex-shrink-0 text-sm sm:text-base" />
+                        <span className="text-xs sm:text-sm lg:text-base">{feature}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className={`transform transition-all duration-700 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                  <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8">
-                    <Link to="/contact">
-                      <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                        Me contacter
-                        <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+                {/* Action Buttons - Stack on mobile */}
+                <div className={`transform transition-all duration-700 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8">
+                    <Link to="/contact" className="w-full sm:w-auto">
+                      <button className="group relative w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl overflow-hidden shadow-2xl hover:shadow-blue-500/50 transform hover:scale-105 transition-all duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                        <span className="relative flex items-center justify-center gap-2 text-sm sm:text-base">
+                          Démarrer un projet
+                          <FaRocket className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </span>
                       </button>
                     </Link>
-                    
-                    <Link to="/experience">
-                      <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-blue-300 text-gray-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                        <FaPlay className="text-blue-600" />
+
+                    <Link to="/experience" className="w-full sm:w-auto">
+                      <button className="group w-full px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 hover:border-white/60 text-white font-bold rounded-xl backdrop-blur-xl hover:bg-white/10 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base">
+                        <FaPlay className="group-hover:text-blue-400 transition-colors" />
                         Voir mes projets
                       </button>
                     </Link>
-                    
-                    <Link to="/gallerie">
-                      <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 border-2 border-purple-200 hover:border-purple-400 text-purple-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                        <FaPalette className="text-purple-600" />
-                        Voir la Gallerie
+
+                    <Link to="/gallerie" className="w-full sm:w-auto">
+                      <button className="group w-full px-6 sm:px-8 py-3 sm:py-4 border-2 border-purple-500/30 hover:border-purple-500/60 text-white font-bold rounded-xl backdrop-blur-xl hover:bg-purple-500/10 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base">
+                        <FaPalette className="group-hover:text-purple-400 transition-colors" />
+                        <span className="hidden xs:inline">Voir la Gallerie</span>
+                        <span className="xs:hidden">Gallerie</span>
                       </button>
                     </Link>
-                    
-                    <a
-                      href="/documents/cv.pdf"
-                      download
-                      className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-green-50 to-emerald-50 hover:from-green-100 hover:to-emerald-100 border-2 border-green-200 hover:border-green-400 text-green-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
-                    >
-                      <FaFileDownload className="group-hover:animate-bounce" />
-                      Télécharger CV
-                    </a>
                   </div>
                 </div>
 
-                {/* Social Links */}
-                <div className={`transform transition-all duration-700 delay-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                  <div className="flex flex-wrap gap-3 sm:gap-4">
+                {/* Social Links - Better spacing on mobile */}
+                <div className={`transform transition-all duration-700 delay-600 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                  <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3">
                     {socialLinks.map((social, index) => (
                       <a
                         key={index}
                         href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group p-3 sm:p-4 bg-white/80 backdrop-blur-sm text-gray-600 hover:text-white rounded-xl border border-gray-200/50 hover:border-transparent shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-                        style={{ '--hover-color': social.color }}
-                        onMouseEnter={(e) => {
-                          e.target.style.backgroundColor = social.color;
-                          e.target.style.borderColor = social.color;
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.backgroundColor = '';
-                          e.target.style.borderColor = '';
-                        }}
+                        className="group relative p-3 sm:p-4 bg-white/5 backdrop-blur-xl border border-white/10 text-gray-300 hover:text-white rounded-xl transform hover:scale-110 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                         aria-label={social.name}
-                        title={social.name}
                       >
-                        <span className="text-lg sm:text-xl">{social.icon}</span>
+                        <div
+                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          style={{ background: `linear-gradient(135deg, ${social.color}40, ${social.color}20)` }}
+                        ></div>
+                        <span className="relative text-base sm:text-xl">{social.icon}</span>
                       </a>
                     ))}
                   </div>
@@ -239,17 +280,58 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 sm:py-16 bg-white/50 backdrop-blur-sm border-y border-gray-200/50">
+      <section className="relative py-12 sm:py-16 lg:py-20 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl border border-gray-200/50 hover:border-blue-300/50 transform hover:-translate-y-2 transition-all duration-300">
-                  <div className="text-2xl mb-2">{stat.icon}</div>
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                    {stat.value}
+              <div key={index} className="group text-center">
+                <div className="relative bg-white/5 backdrop-blur-xl p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-white/10 hover:border-white/30 transform hover:scale-105 hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                  {/* Gradient Background on Hover */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+
+                  <div className="relative">
+                    <div className={`text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>
+                      {stat.icon}
+                    </div>
+                    <div className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-1 sm:mb-2`}>
+                      {stat.value}
+                    </div>
+                    <div className="text-xs sm:text-sm text-gray-400">{stat.label}</div>
                   </div>
-                  <div className="text-sm sm:text-base text-gray-600 leading-relaxed">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section className="relative py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 sm:mb-12 lg:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
+              Expertises
+            </h2>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-400">
+              Des compétences polyvalentes pour vos projets
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+            {skills.map((skill, i) => (
+              <div
+                key={i}
+                className="group relative bg-white/5 backdrop-blur-xl p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 hover:border-white/30 transform hover:scale-105 transition-all duration-300 overflow-hidden"
+              >
+                {/* Gradient on Hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${skill.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+
+                <div className="relative text-center md:text-left">
+                  <div className={`text-4xl sm:text-5xl mb-3 sm:mb-4 bg-gradient-to-r ${skill.gradient} bg-clip-text text-transparent`}>
+                    {skill.icon}
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{skill.text}</h3>
+                  <p className="text-sm sm:text-base text-gray-400">{skill.description}</p>
                 </div>
               </div>
             ))}
@@ -258,34 +340,38 @@ const Home = () => {
       </section>
 
       {/* Technologies Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white to-gray-50">
+      <section className="relative py-12 sm:py-16 lg:py-20 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-4 sm:mb-6">
-              Technologies & Outils
+          <div className="text-center mb-10 sm:mb-12 lg:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4">
+              Stack Technique
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Une expertise technique diversifiée pour répondre à tous vos besoins de développement
+            <p className="text-base sm:text-lg lg:text-xl text-gray-400">
+              Technologies maîtrisées pour des solutions performantes
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
-            {technologies.map((tech, index) => (
-              <div 
-                key={index} 
-                className="group bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl text-center border border-gray-200/50 hover:border-blue-300/50 hover:shadow-xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer"
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+            {technologies.map((tech, i) => (
+              <div
+                key={i}
+                className="group relative bg-white/5 backdrop-blur-xl p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 hover:border-white/30 text-center transform hover:scale-110 hover:-translate-y-2 transition-all duration-300 overflow-hidden"
               >
-                <div className="text-sm sm:text-base font-semibold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
-                  {tech.name}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                <div className="relative">
+                  <div className="text-2xl sm:text-3xl mb-2">{tech.icon}</div>
+                  <div className="text-sm sm:text-base text-white font-bold mb-1">{tech.name}</div>
+                  <div className="text-xs text-gray-400 mb-2 sm:mb-3">{tech.category}</div>
+
+                  {/* Progress Bar */}
+                  <div className="w-full bg-white/10 rounded-full h-1 sm:h-1.5 overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-1000 group-hover:animate-pulse"
+                      style={{ width: `${tech.level}%` }}
+                    ></div>
+                  </div>
                 </div>
-                <div className="text-xs text-gray-500 mb-3">{tech.category}</div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-700 group-hover:from-blue-600 group-hover:to-purple-600" 
-                    style={{ width: `${tech.level}%` }}
-                  ></div>
-                </div>
-                <div className="text-xs text-gray-500 mt-1">{tech.level}%</div>
               </div>
             ))}
           </div>
@@ -293,42 +379,60 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
-        {/* Background Animation */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-600/10 to-purple-600/10 animate-pulse"></div>
-          <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-to-l from-pink-500/20 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-transparent rounded-full blur-3xl"></div>
-        </div>
+      <section className="relative py-12 sm:py-16 lg:py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 backdrop-blur-xl p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl border border-white/20 overflow-hidden">
+            {/* Animated Background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10 animate-pulse"></div>
 
-        <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
-            Prêt à donner vie à votre projet ?
-          </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 lg:mb-10 max-w-3xl mx-auto leading-relaxed">
-            Collaborons ensemble pour créer quelque chose d'extraordinaire qui fera la différence pour votre entreprise.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
-            <Link to="/contact">
-              <button className="group w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
-                Commencer un projet
-                <FaRocket className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
-            </Link>
-            <Link to="/experience">
-              <button className="group w-full sm:w-auto px-6 sm:px-8 lg:px-10 py-3 sm:py-4 border-2 border-white/30 hover:border-white/50 text-white hover:bg-white/10 font-semibold rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 backdrop-blur-sm flex items-center justify-center gap-2">
-                <FaPlay className="group-hover:text-blue-400 transition-colors" />
-                Découvrir mes réalisations
-              </button>
-            </Link>
+            <div className="relative text-center">
+              <HiSparkles className="text-4xl sm:text-5xl text-yellow-400 mx-auto mb-4 sm:mb-6 animate-bounce" />
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
+                Prêt à concrétiser votre vision ?
+              </h2>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto">
+                Collaborons pour créer quelque chose d'extraordinaire qui propulsera votre entreprise vers de nouveaux sommets.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                <Link to="/contact" className="w-full sm:w-auto">
+                  <button className="group w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-2xl hover:shadow-blue-500/50 transform hover:scale-105 transition-all duration-300">
+                    <span className="flex items-center justify-center gap-2 text-sm sm:text-base">
+                      Démarrer maintenant
+                      <FaRocket className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </span>
+                  </button>
+                </Link>
+
+                <a
+                  href="/documents/cv.pdf"
+                  download
+                  className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/30 hover:border-white/60 text-white font-bold rounded-xl backdrop-blur-xl hover:bg-white/10 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
+                >
+                  <FaFileDownload className="group-hover:animate-bounce" />
+                  <span className="hidden xs:inline">Télécharger CV</span>
+                  <span className="xs:hidden">CV</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <style jsx>{`
+        @keyframes gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+        
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+          50% { transform: translateY(-20px); }
         }
         
         .animate-float {
@@ -339,10 +443,21 @@ const Home = () => {
           animation-delay: 0.5s;
         }
         
-        @media (max-width: 640px) {
-          .animate-float {
-            animation: float 2s ease-in-out infinite;
-          }
+        .delay-1000 {
+          animation-delay: 1s;
+        }
+        
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 10s linear infinite;
+        }
+        
+        .perspective-1000 {
+          perspective: 1000px;
         }
       `}</style>
     </div>
