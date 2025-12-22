@@ -4,48 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const navList = [
-  {
-    id: 1,
-    data: "Accueil",
-    path: "/",
-    icon: FaHome,
-    description: "Page d'accueil"
-  },
-  {
-    id: 2,
-    data: "Services",
-    path: "/service",
-    icon: FaCogs,
-    description: "Mes services"
-  },
-  {
-    id: 3,
-    data: "Compétences",
-    path: "/skills",
-    icon: FaBrain,
-    description: "Mes compétences"
-  },
-  {
-    id: 4,
-    data: "Education",
-    path: "/education",
-    icon: FaGraduationCap,
-    description: "Mon parcours"
-  },
-  {
-    id: 5,
-    data: "Expérience",
-    path: "/experience",
-    icon: FaBriefcase,
-    description: "Mon expérience"
-  },
-  {
-    id: 6,
-    data: "Contact",
-    path: "/contact",
-    icon: FaEnvelope,
-    description: "Me contacter"
-  },
+  { id: 1, data: "Accueil", path: "/", icon: FaHome, description: "Page d'accueil" },
+  { id: 2, data: "Services", path: "/service", icon: FaCogs, description: "Mes services" },
+  { id: 3, data: "Compétences", path: "/skills", icon: FaBrain, description: "Mes compétences" },
+  { id: 4, data: "Education", path: "/education", icon: FaGraduationCap, description: "Mon parcours" },
+  { id: 5, data: "Expérience", path: "/experience", icon: FaBriefcase, description: "Mon expérience" },
+  { id: 6, data: "Contact", path: "/contact", icon: FaEnvelope, description: "Me contacter" },
 ];
 
 const Header = () => {
@@ -56,49 +20,36 @@ const Header = () => {
   const location = useLocation();
   const headerRef = useRef(null);
   const lastScrollY = useRef(0);
-  const isHidden = useRef(false);
 
-  // Détection de la préférence de réduction des animations
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setIsReducedMotion(mediaQuery.matches);
-
     const handleChange = (e) => setIsReducedMotion(e.matches);
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Gestion du scroll avec cache automatique
   useEffect(() => {
     let ticking = false;
-
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          // Effet de flou et ombre au scroll
           setScrolled(currentScrollY > 50);
-
-          // Cache l'en-tête lors du défilement vers le bas
-          if (headerRef.current) {
+          
+          if (headerRef.current && !isMobileMenuOpen) {
             const headerHeight = headerRef.current.offsetHeight;
             const scrollDelta = currentScrollY - lastScrollY.current;
-
-            if (currentScrollY > headerHeight * 2 && scrollDelta > 10 && !isMobileMenuOpen) {
+            
+            if (currentScrollY > headerHeight * 2 && scrollDelta > 10) {
               headerRef.current.style.transform = `translateY(-100%)`;
-              isHidden.current = true;
             } else if (scrollDelta < -10 || currentScrollY < headerHeight) {
               headerRef.current.style.transform = `translateY(0)`;
-              isHidden.current = false;
             }
-
             lastScrollY.current = currentScrollY;
           }
-
           ticking = false;
         });
-
         ticking = true;
       }
     };
@@ -107,7 +58,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobileMenuOpen]);
 
-  // Gestion du menu mobile
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(prev => !prev);
   }, []);
@@ -116,12 +66,10 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   }, []);
 
-  // Fermer le menu mobile lors du changement de route
   useEffect(() => {
     closeMobileMenu();
   }, [location.pathname, closeMobileMenu]);
 
-  // Gestion du scroll lock avec amélioration
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -130,47 +78,22 @@ const Header = () => {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     }
-
     return () => {
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     };
   }, [isMobileMenuOpen]);
 
-  // Navigation rapide au clavier
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Échap pour fermer le menu
       if (e.key === 'Escape' && isMobileMenuOpen) {
         closeMobileMenu();
       }
-
-      // Navigation au clavier
-      if (e.key === 'Tab' && isMobileMenuOpen) {
-        const focusableElements = headerRef.current.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-
-        if (focusableElements.length > 0) {
-          const firstElement = focusableElements[0];
-          const lastElement = focusableElements[focusableElements.length - 1];
-
-          if (e.shiftKey && document.activeElement === firstElement) {
-            e.preventDefault();
-            lastElement.focus();
-          } else if (!e.shiftKey && document.activeElement === lastElement) {
-            e.preventDefault();
-            firstElement.focus();
-          }
-        }
-      }
     };
-
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen, closeMobileMenu]);
 
-  // Animations conditionnelles
   const getAnimationProps = (baseProps) => {
     if (isReducedMotion) {
       return { ...baseProps, transition: { duration: 0 } };
@@ -180,14 +103,7 @@ const Header = () => {
 
   const navVariants = getAnimationProps({
     hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
   });
 
   const mobileMenuVariants = getAnimationProps({
@@ -195,312 +111,242 @@ const Header = () => {
     visible: {
       opacity: 1,
       x: 0,
-      transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 300,
-        staggerChildren: 0.05,
-        delayChildren: 0.1
-      }
+      transition: { type: "spring", damping: 20, stiffness: 300, staggerChildren: 0.05, delayChildren: 0.1 }
     },
-    exit: {
-      opacity: 0,
-      x: '100%',
-      transition: {
-        duration: 0.2
-      }
-    }
+    exit: { opacity: 0, x: '100%', transition: { duration: 0.2 } }
   });
 
-  // Rendu conditionnel des icônes
   const NavIcon = ({ icon: Icon, isActive }) => (
-    <span className="relative z-[108]">
-      <Icon
-        className={`text-lg mr-2 transition-colors duration-200 ${isActive ? 'text-white' : 'text-gray-400'}`}
-      />
-    </span>
+    <Icon className={`text-xl transition-colors ${isActive ? 'text-white' : 'text-gray-400'}`} />
   );
 
   return (
-    <motion.header
-      ref={headerRef}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={getAnimationProps({
-        type: "spring",
-        stiffness: 120,
-        damping: 20
-      })}
-      className={`fixed w-full flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-16 py-3 z-[100] transition-all duration-300 ${scrolled
-        ? 'bg-gray-900/98 backdrop-blur-lg shadow-2xl border-b border-gray-700/30 py-2'
-        : 'bg-gray-900/95 backdrop-blur-md py-3'
+    <>
+      <motion.header
+        ref={headerRef}
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+          scrolled 
+            ? 'bg-gray-900/98 backdrop-blur-md shadow-2xl border-b border-white/10' 
+            : 'bg-gray-900/95 backdrop-blur-sm'
         }`}
-      style={{
-        willChange: 'transform, background-color',
-        transition: 'transform 0.3s ease, background-color 0.3s ease, padding 0.3s ease'
-      }}
-    >
-      {/* Logo avec feedback tactile amélioré */}
-      <motion.div
-        whileHover={!isReducedMotion ? { scale: 1.05 } : {}}
-        whileTap={!isReducedMotion ? { scale: 0.95 } : {}}
-        className='relative z-[110]'
-      >
-        <NavLink
-          to="/"
-          onClick={closeMobileMenu}
-          className='text-2xl sm:text-3xl font-black bg-gradient-to-r from-red-500 via-pink-500 to-red-600 bg-clip-text text-transparent hover:from-red-400 hover:via-pink-400 hover:to-red-500 transition-all duration-300 relative group'
-          aria-label="Retour à l'accueil"
-        >
-          <span className="relative z-10 text-white">TOBIE</span>
-          <span className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-pink-500/10 to-red-600/0 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300" />
-        </NavLink>
-      </motion.div>
-
-      {/* Desktop Navigation avec tooltips */}
-      <motion.nav
-        variants={navVariants}
         initial="hidden"
         animate="visible"
-        className='hidden md:flex bg-gray-800/40 backdrop-blur-md rounded-full px-6 py-2 border border-gray-700/50 shadow-lg z-[105]'
-        aria-label="Navigation principale"
+        variants={navVariants}
       >
-        {navList.map((item) => {
-          const isActive = location.pathname === item.path;
-          return (
-            <motion.div
-              key={`desktop-${item.id}`}
-              variants={navItemVariants}
-              className='relative mx-2 lg:mx-3'
-              whileHover={!isReducedMotion ? { y: -2 } : {}}
-              onMouseEnter={() => setActiveHover(item.id)}
-              onMouseLeave={() => setActiveHover(null)}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            
+            {/* Logo */}
+            <NavLink
+              to="/"
+              className="relative z-[105] flex items-center group"
+              aria-label="Retour à l'accueil"
             >
-              <NavLink
-                to={item.path}
-                onClick={closeMobileMenu}
-                className={({ isActive: linkIsActive }) =>
-                  `relative text-sm lg:text-base font-semibold px-4 py-2.5 rounded-full transition-all duration-300 z-[106] flex items-center group ${linkIsActive
-                    ? 'text-white shadow-lg'
-                    : 'text-gray-300 hover:text-white'
-                  }`
-                }
-                aria-current={isActive ? 'page' : undefined}
-                title={item.description}
+              <motion.div
+                className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <NavIcon icon={item.icon} isActive={isActive} />
-                <span className="relative z-[107]">{item.data}</span>
+                TOBIE
+              </motion.div>
+            </NavLink>
 
-                {/* Indicateur d'état actif */}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeDesktopIndicator"
-                    className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-600 rounded-full z-[106]"
-                    transition={getAnimationProps({
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 30
-                    })}
-                  />
-                )}
-
-                {/* Tooltip au survol */}
-                {activeHover === item.id && !isActive && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs py-1 px-2 rounded whitespace-nowrap z-[200]"
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-2" aria-label="Navigation principale">
+              {navList.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <div
+                    key={item.id}
+                    className="relative"
+                    onMouseEnter={() => setActiveHover(item.id)}
+                    onMouseLeave={() => setActiveHover(null)}
                   >
-                    {item.description}
-                    <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45" />
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive: linkIsActive }) =>
+                        `relative text-sm lg:text-base font-semibold px-4 py-2.5 rounded-full transition-all duration-300 z-[106] flex items-center group ${
+                          linkIsActive
+                            ? 'text-white shadow-lg'
+                            : 'text-gray-300 hover:text-white'
+                        }`
+                      }
+                      aria-current={isActive ? 'page' : undefined}
+                      title={item.description}
+                    >
+                      {item.data}
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeNav"
+                          className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full -z-10"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                        />
+                      )}
+                    </NavLink>
+
+                    {activeHover === item.id && !isActive && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-1.5 bg-gray-800 text-white text-xs rounded-lg whitespace-nowrap pointer-events-none z-[107] shadow-xl"
+                      >
+                        {item.description}
+                        <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45" />
+                      </motion.div>
+                    )}
+                  </div>
+                );
+              })}
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              onClick={toggleMobileMenu}
+              className="lg:hidden relative z-[105] w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-white/20 text-white shadow-lg hover:shadow-blue-500/50 transition-all duration-300 active:scale-95"
+              whileTap={{ scale: 0.9 }}
+              aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              <AnimatePresence mode="wait">
+                {isMobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FaTimes className="text-2xl" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FaBars className="text-2xl" />
                   </motion.div>
                 )}
-              </NavLink>
-            </motion.div>
-          );
-        })}
-      </motion.nav>
+              </AnimatePresence>
+            </motion.button>
+          </div>
+        </div>
+      </motion.header>
 
-      {/* Mobile menu button amélioré */}
-      <motion.button
-        className='md:hidden relative p-3 rounded-full bg-gray-800/60 backdrop-blur-sm border border-gray-700/50 text-white focus:outline-none z-[110] focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900'
-        onClick={toggleMobileMenu}
-        aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-        aria-expanded={isMobileMenuOpen}
-        aria-controls="mobile-menu"
-        whileHover={!isReducedMotion ? { scale: 1.1 } : {}}
-        whileTap={!isReducedMotion ? { scale: 0.9 } : {}}
-      >
-        <motion.div
-          animate={isMobileMenuOpen ? { rotate: 180 } : { rotate: 0 }}
-          transition={getAnimationProps({ duration: 0.3 })}
-        >
-          {isMobileMenuOpen ? (
-            <FaTimes size={20} aria-hidden="true" />
-          ) : (
-            <FaBars size={20} aria-hidden="true" />
-          )}
-        </motion.div>
-
-        {/* Indicateur de notification optionnel */}
-        {/* <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping" /> */}
-      </motion.button>
-
-      {/* Mobile Navigation Menu avec améliorations */}
-      <AnimatePresence mode="wait">
+      {/* Mobile Navigation Menu */}
+      <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Overlay avec fermeture au clic */}
+            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className='md:hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[90]'
               onClick={closeMobileMenu}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[98] lg:hidden"
               aria-hidden="true"
             />
 
-            {/* Menu coulissant */}
-            <motion.div
-              id="mobile-menu"
+            {/* Menu Panel */}
+            <motion.nav
               variants={mobileMenuVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              className='md:hidden fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-gray-900/98 backdrop-blur-lg z-[95] shadow-2xl border-l border-gray-700/50 flex flex-col'
-              role="dialog"
-              aria-modal="true"
-              aria-label="Menu de navigation"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 z-[99] lg:hidden overflow-hidden shadow-2xl"
+              aria-label="Navigation mobile"
             >
-              {/* Header du menu mobile */}
-              <div className='flex justify-between items-center p-6 border-b border-gray-700/50 shrink-0'>
-                <motion.h2
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className='text-xl font-bold bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent'
-                >
+              {/* Header */}
+              <div className="sticky top-0 bg-gradient-to-r from-gray-900/95 to-gray-800/95 backdrop-blur-xl border-b border-white/10 px-6 py-5 z-10">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent flex items-center gap-2">
+                  <FaBars className="text-blue-400" />
                   Navigation
-                </motion.h2>
-                <motion.button
-                  onClick={closeMobileMenu}
-                  className='p-2 rounded-full bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500'
-                  whileHover={!isReducedMotion ? { scale: 1.1 } : {}}
-                  whileTap={!isReducedMotion ? { scale: 0.9 } : {}}
-                  aria-label="Fermer le menu"
-                >
-                  <FaTimes size={18} aria-hidden="true" />
-                </motion.button>
+                </h2>
               </div>
 
-              {/* Navigation items avec scroll si nécessaire */}
-              <nav className='flex-1 overflow-y-auto p-6 space-y-1'>
+              {/* Navigation Items */}
+              <div className="overflow-y-auto h-[calc(100vh-180px)] px-4 py-6 space-y-2">
                 {navList.map((item, index) => {
                   const isActive = location.pathname === item.path;
                   return (
                     <motion.div
-                      key={`mobile-${item.id}`}
-                      variants={getAnimationProps({
+                      key={item.id}
+                      variants={{
                         hidden: { opacity: 0, x: 50 },
                         visible: {
                           opacity: 1,
                           x: 0,
-                          transition: {
-                            type: "spring",
-                            damping: 20,
-                            stiffness: 300,
-                            delay: index * 0.05
-                          }
+                          transition: { type: "spring", damping: 20, stiffness: 300 }
                         }
-                      })}
-                      whileHover={!isReducedMotion ? { x: 10 } : {}}
-                      whileTap={!isReducedMotion ? { scale: 0.98 } : {}}
+                      }}
                     >
                       <NavLink
                         to={item.path}
                         onClick={closeMobileMenu}
                         className={({ isActive: linkIsActive }) =>
-                          `group relative flex items-center text-lg font-medium py-4 px-6 rounded-xl transition-all duration-300 z-[96] ${linkIsActive
-                            ? 'bg-gradient-to-r from-red-500/20 to-pink-500/20 text-white shadow-lg'
-                            : 'text-gray-300 hover:text-white hover:bg-gray-800/70'
+                          `group relative flex items-center text-lg font-medium py-4 px-6 rounded-xl transition-all duration-300 ${
+                            linkIsActive
+                              ? 'bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-white shadow-xl border border-blue-500/30'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-800/70 border border-transparent'
                           }`
                         }
                         aria-current={isActive ? 'page' : undefined}
                       >
-                        <NavIcon icon={item.icon} isActive={isActive} />
-                        <div className="flex-1">
-                          <span className="relative z-[97] block">{item.data}</span>
-                          <span className="text-xs text-gray-400 mt-1 block">
-                            {item.description}
-                          </span>
+                        <div className="flex items-center justify-between w-full">
+                          <div className="flex items-center gap-4">
+                            <div className={`p-2.5 rounded-lg transition-all ${
+                              isActive 
+                                ? 'bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg' 
+                                : 'bg-gray-800/50 group-hover:bg-gray-700/70'
+                            }`}>
+                              <NavIcon icon={item.icon} isActive={isActive} />
+                            </div>
+                            <div>
+                              <div className="font-semibold">{item.data}</div>
+                              <div className="text-xs text-gray-400 mt-0.5">{item.description}</div>
+                            </div>
+                          </div>
+                          
+                          {isActive && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="w-2 h-2 bg-blue-400 rounded-full"
+                            />
+                          )}
+
+                          <motion.span
+                            className={`text-xl transition-opacity ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-50'}`}
+                            animate={{ x: isActive ? [0, 5, 0] : 0 }}
+                            transition={{ repeat: Infinity, duration: 1.5 }}
+                          >
+                            →
+                          </motion.span>
                         </div>
-
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeMobileIndicator"
-                            className="w-2 h-2 bg-gradient-to-r from-red-500 to-pink-500 rounded-full ml-2"
-                            transition={getAnimationProps({
-                              type: "spring",
-                              stiffness: 300,
-                              damping: 30
-                            })}
-                          />
-                        )}
-
-                        {/* Flèche indicatrice */}
-                        <motion.div
-                          className="ml-2 text-gray-400 group-hover:text-white transition-colors"
-                          animate={!isReducedMotion ? { x: [0, 5, 0] } : {}}
-                          transition={{ repeat: Infinity, duration: 1.5 }}
-                        >
-                          →
-                        </motion.div>
                       </NavLink>
                     </motion.div>
                   );
                 })}
-              </nav>
+              </div>
 
-              {/* Footer du menu mobile */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className='shrink-0 p-6 border-t border-gray-700/50'
-              >
-                <div className='text-center'>
-                  <p className='text-sm text-gray-500 mb-2'>
-                    Portfolio • {new Date().getFullYear()}
-                  </p>
-                  <p className='text-xs text-gray-600'>
-                    Appuyez sur Échap pour fermer
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
+              {/* Footer */}
+              <div className="sticky bottom-0 bg-gradient-to-r from-gray-900/95 to-gray-800/95 backdrop-blur-xl border-t border-white/10 px-6 py-4">
+                <p className="text-sm text-gray-400 text-center mb-1">
+                  Portfolio • {new Date().getFullYear()}
+                </p>
+                <p className="text-xs text-gray-500 text-center">
+                  Appuyez sur Échap pour fermer
+                </p>
+              </div>
+            </motion.nav>
           </>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
-};
-
-// Variants pour les animations
-const navItemVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: { opacity: 1, y: 0 }
-};
-
-const mobileItemVariants = {
-  hidden: { opacity: 0, x: 50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: "spring",
-      damping: 20,
-      stiffness: 300
-    }
-  }
 };
 
 export default Header;

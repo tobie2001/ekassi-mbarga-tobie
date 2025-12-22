@@ -119,8 +119,8 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
 
             {/* Image - First on mobile, Second on desktop */}
-            <div className="lg:col-span-5 lg:order-2 z-10">
-              <div className="relative max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mt-20">
+            <div className="lg:col-span-5 lg:order-2 z-10 relative">
+              <div className="relative max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto mt-20 z-0 md:z-0">
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-purple-500/30 to-pink-500/30 rounded-[2rem] sm:rounded-[3rem] blur-2xl sm:blur-3xl animate-pulse"></div>
 
@@ -419,7 +419,7 @@ const Home = () => {
         </div>
       </section>
 
-      <style jsx>{`
+      <style>{`
         @keyframes gradient {
           0%, 100% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
