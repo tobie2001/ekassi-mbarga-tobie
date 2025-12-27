@@ -188,27 +188,45 @@ const Experience = () => {
         <meta name="twitter:description" content="Découvrez les projets et expériences d'Ekassi Mbarga Tobie : web, mobile, consulting, UI/UX, e-commerce, applications." />
         <meta name="twitter:image" content="https://ekassi-mbarga-tobie.vercel.app/images/experience-cover.jpg" />
       </Helmet>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        {/* Background decorative elements */}
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
+        {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-pink-400 to-red-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse delay-500"></div>
+          {/* Gradient Orbs */}
+          <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-l from-blue-500/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 left-0 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-r from-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-gradient-to-r from-pink-500/10 to-transparent rounded-full blur-3xl animate-pulse delay-500"></div>
+
+          {/* Floating Particles - Hidden on mobile for performance */}
+          <div className="hidden md:block">
+            {[...Array(15)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-white/30 rounded-full animate-float"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${3 + Math.random() * 4}s`
+                }}
+              ></div>
+            ))}
+          </div>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Header Section */}
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center justify-center p-3 bg-white rounded-full shadow-lg mb-6">
-              <Briefcase className="w-8 h-8 text-blue-600" />
+          <div className="text-center mb-20 pt-16 sm:pt-20 lg:pt-24">
+            <div className="inline-flex items-center justify-center p-3 bg-white/10 backdrop-blur-xl rounded-full shadow-2xl border border-white/20 mb-6">
+              <Briefcase className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 mb-6">
+            <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 mb-6 animate-gradient">
               Mes Projets
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Une expertise technique polyvalente forgée à travers des projets innovants
               et des défis technologiques stimulants
             </p>
+            <div className="mt-8 w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
           </div>
 
           {/* Experience Cards Grid */}
@@ -216,9 +234,9 @@ const Experience = () => {
             {professionalExperiences.map((exp, index) => (
               <div
                 key={index}
-                className={`group relative bg-white rounded-2xl shadow-lg transition-all duration-500 overflow-hidden w-full max-w-full mx-auto
+                className={`group relative bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 transition-all duration-500 overflow-hidden w-full max-w-full mx-auto
                 ${hoveredCard === index ? 'scale-105' : ''}
-                ${typeof window !== 'undefined' && window.innerWidth < 640 ? '' : 'hover:shadow-2xl hover:-translate-y-2'}`}
+                ${typeof window !== 'undefined' && window.innerWidth < 640 ? '' : 'hover:shadow-blue-500/20 hover:shadow-2xl hover:-translate-y-2'}`}
                 style={{ maxWidth: '100%' }}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
@@ -230,11 +248,12 @@ const Experience = () => {
                 <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
                 {/* Status badge */}
                 <div className="absolute top-4 right-4 z-20">
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${exp.status === 'En cours'
-                    ? 'bg-green-100 text-green-700 border-2 border-green-200'
-                    : 'bg-gray-100 text-gray-700 border-2 border-gray-200'
+                  <span className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-xl border ${
+                    exp.status === 'En cours'
+                    ? 'bg-green-500/20 text-green-300 border-green-500/30'
+                    : 'bg-gray-500/20 text-gray-300 border-gray-500/30'
                     }`}>
-                    {exp.status === 'En cours' && <div className="inline-block w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></div>}
+                    {exp.status === 'En cours' && <div className="inline-block w-2 h-2 bg-green-400 rounded-full mr-1 animate-pulse"></div>}
                     {exp.status}
                   </span>
                 </div>
@@ -252,7 +271,7 @@ const Experience = () => {
                   {/* Content */}
                   <div className="space-y-4">
                     <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
                         {exp.role}
                       </h3>
                       <h4 className={`text-lg font-semibold bg-gradient-to-r ${exp.gradient} bg-clip-text text-transparent`}>
@@ -260,25 +279,25 @@ const Experience = () => {
                       </h4>
                     </div>
                     {/* Meta information */}
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-300">
                       <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-2 text-blue-500" />
+                        <Clock className="w-4 h-4 mr-2 text-blue-400" />
                         {exp.period}
                       </div>
                       <div className="flex items-center">
-                        <MapPin className="w-4 h-4 mr-2 text-red-500" />
+                        <MapPin className="w-4 h-4 mr-2 text-red-400" />
                         {exp.location}
                       </div>
                     </div>
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
                       {exp.tags.slice(0, 3).map((tag, i) => (
-                        <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                        <span key={i} className="px-3 py-1 bg-white/10 backdrop-blur-xl border border-white/20 text-white rounded-full text-sm font-medium hover:bg-white/20 transition-colors">
                           {tag}
                         </span>
                       ))}
                       {exp.tags.length > 3 && (
-                        <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                        <span className="px-3 py-1 bg-blue-500/20 backdrop-blur-xl border border-blue-500/30 text-blue-300 rounded-full text-sm font-medium">
                           +{exp.tags.length - 3}
                         </span>
                       )}
@@ -289,7 +308,7 @@ const Experience = () => {
                         href={exp.projectUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="py-3 px-4 bg-white border-2 border-gray-200 text-gray-700 rounded-xl font-semibold hover:border-gray-300 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center mt-2"
+                        className="py-3 px-4 bg-white/10 backdrop-blur-xl border-2 border-white/20 text-white rounded-xl font-semibold hover:border-white/40 hover:bg-white/20 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center mt-2"
                       >
                         <ExternalLink className="w-4 h-4" />
                       </a>
@@ -302,9 +321,9 @@ const Experience = () => {
 
           {/* Call to action */}
           <div className="text-center">
-            <div className="inline-flex items-center justify-center p-4 bg-white rounded-2xl shadow-lg">
-              <Rocket className="w-6 h-6 text-blue-600 mr-3" />
-              <span className="text-lg font-semibold text-gray-800">
+            <div className="inline-flex items-center justify-center p-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl">
+              <Rocket className="w-6 h-6 text-blue-400 mr-3" />
+              <span className="text-lg font-semibold text-white">
                 Prêt pour de nouveaux défis technologiques
               </span>
             </div>
@@ -313,28 +332,47 @@ const Experience = () => {
 
         </div>
 
-        <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes slideUp {
-          from { 
-            opacity: 0; 
-            transform: translateY(50px); 
+        <style>{`
+          @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
           }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
+
+          .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
           }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-        .animate-slideUp {
-          animation: slideUp 0.4s ease-out;
-        }
-      `}</style>
+
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+          }
+
+          .animate-float {
+            animation: float 3s ease-in-out infinite;
+          }
+
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          @keyframes slideUp {
+            from {
+              opacity: 0;
+              transform: translateY(50px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out;
+          }
+          .animate-slideUp {
+            animation: slideUp 0.4s ease-out;
+          }
+        `}</style>
       </div>
     </>
   );

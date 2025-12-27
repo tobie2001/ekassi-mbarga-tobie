@@ -145,18 +145,41 @@ const Skills = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Gradient Orbs */}
+        <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-l from-blue-500/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] sm:w-[400px] lg:w-[500px] h-[300px] sm:h-[400px] lg:h-[500px] bg-gradient-to-r from-purple-500/20 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 w-[200px] sm:w-[300px] h-[200px] sm:h-[300px] bg-gradient-to-r from-pink-500/10 to-transparent rounded-full blur-3xl animate-pulse delay-500"></div>
+
+        {/* Floating Particles - Hidden on mobile for performance */}
+        <div className="hidden md:block">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white/30 rounded-full animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 4}s`
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header Section Enhanced */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-6 shadow-lg">
+        <div className="text-center mb-20 pt-16 sm:pt-20 lg:pt-24">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-6 shadow-2xl">
             <Brain className="w-8 h-8 text-white" />
           </div>
-          <h2 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent mb-6">
+          <h2 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 animate-gradient">
             Mes Compétences
           </h2>
-          <p className="max-w-3xl mx-auto text-xl text-gray-600 leading-relaxed mb-8">
-            Un éventail complet de technologies maîtrisées pour créer des solutions digitales 
+          <p className="max-w-3xl mx-auto text-xl text-gray-300 leading-relaxed mb-8">
+            Un éventail complet de technologies maîtrisées pour créer des solutions digitales
             performantes et innovantes
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
@@ -166,11 +189,11 @@ const Skills = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {stats.map((stat, index) => (
             <div key={index} className="text-center group">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-lg mb-4 text-white group-hover:scale-110 transition-transform duration-300">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl shadow-2xl mb-4 text-white group-hover:scale-110 transition-transform duration-300">
                 {stat.icon}
               </div>
-              <div className="text-4xl font-bold text-gray-900 mb-2">{stat.number}</div>
-              <div className="text-gray-600 font-medium">{stat.label}</div>
+              <div className="text-4xl font-bold text-white mb-2">{stat.number}</div>
+              <div className="text-gray-300 font-medium">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -181,13 +204,13 @@ const Skills = () => {
             <button
               key={index}
               onClick={() => setActiveCategory(index)}
-              className={`flex items-center px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
+              className={`flex items-center px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-xl ${
                 activeCategory === index
-                  ? `bg-gradient-to-r ${category.gradient} text-white shadow-lg`
-                  : 'bg-white text-gray-600 hover:bg-gray-50 shadow-md'
+                  ? `bg-gradient-to-r ${category.gradient} text-white shadow-2xl border border-white/20`
+                  : 'bg-white/10 text-gray-300 hover:bg-white/20 shadow-lg border border-white/10 hover:border-white/30'
               }`}
             >
-              <div className={`mr-3 ${activeCategory === index ? 'text-white' : ''}`}>
+              <div className={`mr-3 ${activeCategory === index ? 'text-white' : 'text-gray-400'}`}>
                 {category.icon}
               </div>
               {category.title}
@@ -197,28 +220,28 @@ const Skills = () => {
 
         {/* Active Category Display */}
         <div className="mb-20">
-          <div 
-            className={`bg-gradient-to-br ${skillsCategories[activeCategory].bgGradient} rounded-3xl p-8 lg:p-12 shadow-xl`}
+          <div
+            className={`bg-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 shadow-2xl border border-white/20`}
             data-category={activeCategory}
           >
             <div className="text-center mb-8">
-              <div className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br ${skillsCategories[activeCategory].gradient} rounded-2xl shadow-lg mb-4 text-white`}>
+              <div className={`inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br ${skillsCategories[activeCategory].gradient} rounded-2xl shadow-2xl mb-4 text-white`}>
                 {skillsCategories[activeCategory].icon}
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 mb-2">
+              <h3 className="text-3xl font-bold text-white mb-2">
                 {skillsCategories[activeCategory].title}
               </h3>
-              <p className="text-gray-600 text-lg">
+              <p className="text-gray-300 text-lg">
                 {skillsCategories[activeCategory].description}
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {skillsCategories[activeCategory].skills.map((skill, i) => (
-                <div key={i} className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div key={i} className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20">
                   <div className="flex justify-between items-start mb-4">
                     <div>
-                      <h4 className="text-lg font-bold text-gray-900 flex items-center">
+                      <h4 className="text-lg font-bold text-white flex items-center">
                         {skill.name}
                         {skill.trending && (
                           <div className="ml-2 px-2 py-1 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs rounded-full flex items-center">
@@ -227,12 +250,12 @@ const Skills = () => {
                           </div>
                         )}
                       </h4>
-                      <p className="text-sm text-gray-500 mt-1">
+                      <p className="text-sm text-gray-300 mt-1">
                         {getSkillLevelLabel(skill.level)}
                       </p>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-900">{skill.level}%</div>
+                      <div className="text-2xl font-bold text-white">{skill.level}%</div>
                       <div className="flex">
                         {[...Array(5)].map((_, starIndex) => (
                           <Star
@@ -240,7 +263,7 @@ const Skills = () => {
                             className={`w-4 h-4 ${
                               starIndex < Math.round(skill.level / 20)
                                 ? 'text-yellow-400 fill-current'
-                                : 'text-gray-300'
+                                : 'text-gray-400'
                             }`}
                           />
                         ))}
@@ -280,13 +303,13 @@ const Skills = () => {
               }`}
               onClick={() => setActiveCategory(index)}
             >
-              <div className={`bg-gradient-to-br ${category.bgGradient} rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-opacity-50`}>
+              <div className={`bg-white/5 backdrop-blur-xl rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40`}>
                 <div className="text-center mb-4">
-                  <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${category.gradient} rounded-xl shadow-lg mb-4 text-white group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${category.gradient} rounded-xl shadow-2xl mb-4 text-white group-hover:scale-110 transition-transform duration-300`}>
                     {category.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{category.title}</h3>
-                  <p className="text-gray-600 text-sm">{category.description}</p>
+                  <h3 className="text-xl font-bold text-white mb-2">{category.title}</h3>
+                  <p className="text-gray-300 text-sm">{category.description}</p>
                 </div>
 
                 <div className="space-y-2">
@@ -306,20 +329,20 @@ const Skills = () => {
         </div>
 
         {/* Additional Skills Section Enhanced */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 relative overflow-hidden">
+        <div className="bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl p-8 lg:p-12 relative overflow-hidden border border-white/20">
           {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full opacity-50"></div>
-          <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-32 h-32 bg-gradient-to-tr from-indigo-100 to-cyan-100 rounded-full opacity-30"></div>
-          
+          <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full opacity-50"></div>
+          <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-32 h-32 bg-gradient-to-tr from-indigo-500/20 to-cyan-500/20 rounded-full opacity-30"></div>
+
           <div className="relative z-10">
             <div className="text-center mb-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-lg mb-4 text-white">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-2xl mb-4 text-white">
                 <Globe className="w-8 h-8" />
               </div>
-              <h3 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent mb-4">
+              <h3 className="text-3xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent mb-4">
                 Compétences Complémentaires
               </h3>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-gray-300 max-w-2xl mx-auto">
                 Outils et technologies additionnels que je maîtrise pour des projets complets
               </p>
             </div>
@@ -340,19 +363,19 @@ const Skills = () => {
                 const gradient = gradients[index % gradients.length];
                 
                 return (
-                  <div 
-                    key={index} 
-                    className="group bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 hover:border-blue-200"
+                  <div
+                    key={index}
+                    className="group bg-white/10 backdrop-blur-xl rounded-xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-white/20 hover:border-white/40"
                   >
                     <div className="flex items-start justify-between mb-3">
-                      <h4 className="font-bold text-gray-900 group-hover:text-blue-700 transition-colors">
+                      <h4 className="font-bold text-white group-hover:text-blue-300 transition-colors">
                         {skill.name}
                       </h4>
                       <div className={`px-2 py-1 bg-gradient-to-r ${gradient} text-white text-xs rounded-full font-semibold`}>
                         {skill.level}
                       </div>
                     </div>
-                    <p className="text-sm text-gray-600 mb-3">{skill.category}</p>
+                    <p className="text-sm text-gray-300 mb-3">{skill.category}</p>
                     <div className="flex">
                       {[...Array(3)].map((_, i) => (
                         <div
@@ -360,7 +383,7 @@ const Skills = () => {
                           className={`w-2 h-2 rounded-full mr-1 ${
                             skill.level === "Expert" || (skill.level === "Avancé" && i < 2) || (skill.level === "Intermédiaire" && i < 1)
                               ? `bg-gradient-to-r ${gradient}`
-                              : 'bg-gray-300'
+                              : 'bg-gray-400'
                           }`}
                         ></div>
                       ))}
