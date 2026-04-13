@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Briefcase, ExternalLink, MapPin, Clock, Rocket } from 'lucide-react';
+import { Briefcase, ExternalLink, MapPin, Clock, Rocket, Monitor, Truck, Package, Navigation, Smartphone, Map, Locate, Bell, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Experience = () => {
@@ -41,6 +41,50 @@ const Experience = () => {
       location: "Cameroun",
       status: "En cours",
       gradient: "from-teal-500 to-green-600"
+    },
+    {
+      role: "Développeur Tauri.js & Full Stack",
+      company: "Transit Manager Pro (Desktop)",
+      period: "2025 - Présent",
+      description: [
+        "Réalisation d'une application de gestion de transit bureautique avec Tauri.js",
+        "Développement d'une interface desktop moderne et performante pour la gestion des flux logistiques",
+        "Implémentation de fonctionnalités de suivi en temps réel des colis et véhicules",
+        "Gestion des utilisateurs, des itinéraires et des livraisons avec base de données locale SQLite",
+        "Création de rapports détaillés et export de données pour l'analyse des performances",
+        "Application hybride combinant la puissance de Rust (backend Tauri) et React (frontend)"
+      ],
+      tags: ["Tauri.js", "React", "Rust", "SQLite", "Tailwind CSS"],
+      image: "/images/transit-manager.png",
+      projectUrl: "https://github.com/tobie1996/transit-manager-tauri",
+      location: "Yaoundé, Cameroun",
+      status: "En cours",
+      gradient: "from-cyan-500 to-blue-600",
+      isTauriApp: true,
+      appType: "desktop"
+    },
+    {
+      role: "Développeur Mobile React Native",
+      company: "Transit Tracking Mobile",
+      period: "2025 - Présent",
+      description: [
+        "Développement d'une application mobile de suivi de commande transit avec géolocalisation GPS",
+        "Suivi en temps réel des colis et véhicules de livraison sur carte interactive",
+        "Notifications push pour les mises à jour de statut des commandes",
+        "Itinéraire optimisé et calcul de distance parcourue par les livreurs",
+        "Historique des trajets et géofencing pour les zones de livraison",
+        "Interface utilisateur intuitive avec React Native et Expo",
+        "Synchronisation des données en temps réel avec Firebase/Node.js backend",
+        "Mode hors ligne avec stockage local pour les zones sans connexion"
+      ],
+      tags: ["React Native", "Expo", "Node.js", "MongoDB", "Socket.io", "Google Maps API"],
+      image: "/images/transit-tracking-mobile.png",
+      projectUrl: "https://github.com/tobie1996/transit-tracking-mobile",
+      location: "Yaoundé, Cameroun",
+      status: "En cours",
+      gradient: "from-green-500 to-emerald-600",
+      isMobileApp: true,
+      appType: "mobile"
     },
     {
       role: "Développeur Full Stack",
@@ -165,7 +209,6 @@ const Experience = () => {
     },
   ];
 
-
   const handleCardClick = (exp) => {
     navigate(`/experience/${encodeURIComponent(exp.company)}`, {
       state: { experience: exp },
@@ -176,16 +219,16 @@ const Experience = () => {
     <>
       <Helmet>
         <title>Expériences & Projets | Ekassi Mbarga Tobie</title>
-        <meta name="description" content="Découvrez les expériences professionnelles et projets réalisés par Ekassi Mbarga Tobie : développement web, mobile, e-commerce, applications, consulting, UI/UX, et plus encore." />
-        <meta name="keywords" content="expérience, projets, portfolio, développement web, développement mobile, React, Node.js, freelance, Ekassi Mbarga Tobie, consulting, UI/UX, applications, e-commerce, Next.js, Tailwind CSS" />
+        <meta name="description" content="Découvrez les expériences professionnelles et projets réalisés par Ekassi Mbarga Tobie : développement web, mobile, desktop avec Tauri.js, application de suivi GPS, e-commerce, applications, consulting, UI/UX, et plus encore." />
+        <meta name="keywords" content="expérience, projets, portfolio, développement web, développement mobile, développement desktop, Tauri.js, React Native, GPS tracking, React, Node.js, freelance, Ekassi Mbarga Tobie, consulting, UI/UX, applications, e-commerce, Next.js, Tailwind CSS, gestion de transit, suivi de colis" />
         <meta property="og:title" content="Expériences & Projets | Ekassi Mbarga Tobie" />
-        <meta property="og:description" content="Parcours professionnel, réalisations et projets innovants d'Ekassi Mbarga Tobie dans le développement web, mobile et consulting." />
+        <meta property="og:description" content="Parcours professionnel, réalisations et projets innovants d'Ekassi Mbarga Tobie dans le développement web, mobile, desktop et consulting." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ekassi-mbarga-tobie.vercel.app/experience" />
         <meta property="og:image" content="https://ekassi-mbarga-tobie.vercel.app/images/experience-cover.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Expériences & Projets | Ekassi Mbarga Tobie" />
-        <meta name="twitter:description" content="Découvrez les projets et expériences d'Ekassi Mbarga Tobie : web, mobile, consulting, UI/UX, e-commerce, applications." />
+        <meta name="twitter:description" content="Découvrez les projets et expériences d'Ekassi Mbarga Tobie : web, mobile, desktop, consulting, UI/UX, e-commerce, applications." />
         <meta name="twitter:image" content="https://ekassi-mbarga-tobie.vercel.app/images/experience-cover.jpg" />
       </Helmet>
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
@@ -246,6 +289,23 @@ const Experience = () => {
               >
                 {/* Gradient overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+                
+                {/* Type Badge - visible selon le type d'application */}
+                <div className="absolute top-4 left-4 z-20">
+                  {exp.isTauriApp && (
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1">
+                      <Monitor className="w-3 h-3" />
+                      Application Desktop
+                    </span>
+                  )}
+                  {exp.isMobileApp && (
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-xl bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-300 border border-green-500/30 flex items-center gap-1">
+                      <Smartphone className="w-3 h-3" />
+                      Application Mobile GPS
+                    </span>
+                  )}
+                </div>
+                
                 {/* Status badge */}
                 <div className="absolute top-4 right-4 z-20">
                   <span className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-xl border ${
@@ -257,27 +317,52 @@ const Experience = () => {
                     {exp.status}
                   </span>
                 </div>
+                
                 <div className="relative z-10 p-3 sm:p-6">
                   {/* Company Image with overlay effect */}
                   <div className="relative overflow-hidden rounded-xl mb-4 sm:mb-6 group">
-                    <img
-                      src={exp.image}
-                      alt={exp.company}
-                      className="w-full h-32 sm:h-48 object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    {exp.isTauriApp ? (
+                      <div className="w-full h-32 sm:h-48 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center">
+                        <div className="text-center">
+                          <Monitor className="w-12 h-12 sm:w-16 sm:h-16 text-cyan-400 mx-auto mb-2" />
+                          <span className="text-white text-sm">Application Desktop Tauri.js</span>
+                        </div>
+                      </div>
+                    ) : exp.isMobileApp ? (
+                      <div className="w-full h-32 sm:h-48 bg-gradient-to-br from-green-500/20 to-emerald-500/20 flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="flex justify-center gap-4 mb-2">
+                            <Smartphone className="w-10 h-10 sm:w-12 sm:h-12 text-green-400" />
+                            <Navigation className="w-10 h-10 sm:w-12 sm:h-12 text-emerald-400" />
+                            <Map className="w-10 h-10 sm:w-12 sm:h-12 text-blue-400" />
+                          </div>
+                          <span className="text-white text-sm">Application Mobile GPS Tracking</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <img
+                        src={exp.image}
+                        alt={exp.company}
+                        className="w-full h-32 sm:h-48 object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className={`absolute inset-0 bg-gradient-to-br ${exp.gradient} opacity-20 mix-blend-overlay`}></div>
                   </div>
+                  
                   {/* Content */}
                   <div className="space-y-4">
                     <div>
                       <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
                         {exp.role}
                       </h3>
-                      <h4 className={`text-lg font-semibold bg-gradient-to-r ${exp.gradient} bg-clip-text text-transparent`}>
+                      <h4 className={`text-lg font-semibold bg-gradient-to-r ${exp.gradient} bg-clip-text text-transparent flex items-center gap-2`}>
+                        {exp.isTauriApp && <Monitor className="w-4 h-4 text-cyan-400" />}
+                        {exp.isMobileApp && <Smartphone className="w-4 h-4 text-green-400" />}
                         {exp.company}
                       </h4>
                     </div>
+                    
                     {/* Meta information */}
                     <div className="flex flex-wrap gap-4 text-sm text-gray-300">
                       <div className="flex items-center">
@@ -289,6 +374,30 @@ const Experience = () => {
                         {exp.location}
                       </div>
                     </div>
+                    
+                    {/* Fonctionnalités clés pour l'app mobile */}
+                    {exp.isMobileApp && (
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        <span className="px-2 py-1 bg-green-500/20 rounded-full text-xs text-green-300 flex items-center gap-1">
+                          <Locate className="w-3 h-3" />
+                          GPS Temps réel
+                        </span>
+                        <span className="px-2 py-1 bg-blue-500/20 rounded-full text-xs text-blue-300 flex items-center gap-1">
+                          <Bell className="w-3 h-3" />
+                          Notifications Push
+                        </span>
+                        <span className="px-2 py-1 bg-purple-500/20 rounded-full text-xs text-purple-300 flex items-center gap-1">
+                          <Map className="w-3 h-3" />
+                          Cartes interactives
+                        </span>
+                      </div>
+                    )}
+                    
+                    {/* Description preview */}
+                    <div className="text-sm text-gray-300 line-clamp-2">
+                      {exp.description[0]}
+                    </div>
+                    
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2">
                       {exp.tags.slice(0, 3).map((tag, i) => (
@@ -302,15 +411,32 @@ const Experience = () => {
                         </span>
                       )}
                     </div>
+                    
                     {/* Project link */}
                     {exp.projectUrl && exp.projectUrl !== "#" && (
                       <a
                         href={exp.projectUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="py-3 px-4 bg-white/10 backdrop-blur-xl border-2 border-white/20 text-white rounded-xl font-semibold hover:border-white/40 hover:bg-white/20 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center mt-2"
+                        className="py-3 px-4 bg-white/10 backdrop-blur-xl border-2 border-white/20 text-white rounded-xl font-semibold hover:border-white/40 hover:bg-white/20 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2 mt-2"
+                        onClick={(e) => e.stopPropagation()}
                       >
-                        <ExternalLink className="w-4 h-4" />
+                        {exp.isTauriApp ? (
+                          <>
+                            <Monitor className="w-4 h-4" />
+                            Voir le projet sur GitHub
+                          </>
+                        ) : exp.isMobileApp ? (
+                          <>
+                            <Smartphone className="w-4 h-4" />
+                            Voir le projet sur GitHub
+                          </>
+                        ) : (
+                          <>
+                            <ExternalLink className="w-4 h-4" />
+                            Voir le projet
+                          </>
+                        )}
                       </a>
                     )}
                   </div>
@@ -328,8 +454,6 @@ const Experience = () => {
               </span>
             </div>
           </div>
-
-
         </div>
 
         <style>{`
@@ -371,6 +495,13 @@ const Experience = () => {
           }
           .animate-slideUp {
             animation: slideUp 0.4s ease-out;
+          }
+          
+          .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
           }
         `}</style>
       </div>
