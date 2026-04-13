@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
 import HeroImage from "../assets/tobie.png";
-import { FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, FaCode, FaPalette, FaRocket, FaArrowRight, FaPlay, FaSmile, FaComments, FaCheckCircle, FaReact, FaNodeJs, FaPython, FaDatabase, FaLeaf, FaJsSquare, FaBootstrap, FaMobileAlt } from "react-icons/fa";
-import { SiMysql, SiTypescript, SiExpress, SiTailwindcss, SiN8N, SiDjango, SiRedis, SiPostgresql, SiFirebase } from "react-icons/si";
-import { HiOutlineMail, HiSparkles } from "react-icons/hi";
+import { 
+  FaGithub, FaLinkedin, FaYoutube, FaFileDownload, FaWhatsapp, FaFacebook, 
+  FaCode, FaPalette, FaRocket, FaPlay, FaSmile, FaComments, 
+  FaCheckCircle, FaReact, FaNodeJs, FaPython, FaDatabase, FaLeaf, 
+  FaJsSquare, FaBootstrap, FaMobileAlt, FaDownload, FaEnvelope, 
+  FaUser, FaProjectDiagram, FaBriefcase, FaTools, FaCloud, FaServer,
+  FaShieldAlt, FaStar, FaHeart, FaGlobe,
+  FaCss3Alt, FaHtml5, FaGitAlt, FaDocker, FaAws, FaMicrosoft
+} from "react-icons/fa";
+import { 
+  SiMysql, SiTypescript, SiExpress, SiTailwindcss, SiN8N, 
+  SiDjango, SiRedis, SiPostgresql, SiFirebase, SiTauri
+} from "react-icons/si";
+import { 
+  HiOutlineMail, HiSparkles
+} from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -60,7 +73,8 @@ const Home = () => {
     { name: 'Django', category: 'Backend', level: 80, icon: <SiDjango className="text-green-900" /> },
     { name: 'Redis', category: 'Database', level: 75, icon: <SiRedis className="text-red-500" /> },
     { name: 'PostgreSQL', category: 'Database', level: 80, icon: <SiPostgresql className="text-blue-700" /> },
-    { name: 'Firebase', category: 'Cloud', level: 75, icon: <SiFirebase className="text-yellow-500" /> }
+    { name: 'Firebase', category: 'Cloud', level: 75, icon: <SiFirebase className="text-yellow-500" /> },
+    { name: 'Tauri.js', category: 'Desktop', level: 85, icon: <SiTauri className="text-purple-400" /> }
   ];
 
   const stats = [
